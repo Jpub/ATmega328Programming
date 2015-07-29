@@ -1,0 +1,341 @@
+
+CH_21_code_1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000000e  00800100  0000018e  00000202  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000018e  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  00000210  2**0
+                  CONTENTS, READONLY
+  3 .debug_aranges 00000058  00000000  00000000  00000240  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   000005ae  00000000  00000000  00000298  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 000001d4  00000000  00000000  00000846  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   000001f7  00000000  00000000  00000a1a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  000000a4  00000000  00000000  00000c14  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    000001e9  00000000  00000000  00000cb8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    000001f0  00000000  00000000  00000ea1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000048  00000000  00000000  00001091  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   8:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  10:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  14:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  18:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  1c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  20:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  24:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  28:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  2c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  30:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  34:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  38:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  3c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  40:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  44:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  48:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  4c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  50:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  54:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  58:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  5c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  60:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  64:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	ee e8       	ldi	r30, 0x8E	; 142
+  7c:	f1 e0       	ldi	r31, 0x01	; 1
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	ae 30       	cpi	r26, 0x0E	; 14
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+  8a:	0e 94 9b 00 	call	0x136	; 0x136 <main>
+  8e:	0c 94 c5 00 	jmp	0x18a	; 0x18a <_exit>
+
+00000092 <__bad_interrupt>:
+  92:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000096 <LCD_pulse_enable>:
+#define COMMAND_DISPLAY_ON_OFF_BIT		2
+#define COMMAND_CURSOR_ON_OFF_BIT		1
+#define COMMAND_BLINK_ON_OFF_BIT		0
+
+void LCD_pulse_enable(void) {		// 하강 에지에서 동작
+	PORT_CONTROL |= (1 << E_PIN);	// E를 HIGH로
+  96:	29 9a       	sbi	0x05, 1	; 5
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  98:	85 e0       	ldi	r24, 0x05	; 5
+  9a:	8a 95       	dec	r24
+  9c:	f1 f7       	brne	.-4      	; 0x9a <LCD_pulse_enable+0x4>
+  9e:	00 00       	nop
+	_delay_us(1);
+	PORT_CONTROL &= ~(1 << E_PIN);	// E를 LOW로
+  a0:	29 98       	cbi	0x05, 1	; 5
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  a2:	8f e9       	ldi	r24, 0x9F	; 159
+  a4:	9f e0       	ldi	r25, 0x0F	; 15
+  a6:	01 97       	sbiw	r24, 0x01	; 1
+  a8:	f1 f7       	brne	.-4      	; 0xa6 <LCD_pulse_enable+0x10>
+  aa:	00 c0       	rjmp	.+0      	; 0xac <LCD_pulse_enable+0x16>
+  ac:	00 00       	nop
+  ae:	08 95       	ret
+
+000000b0 <LCD_write_data>:
+	_delay_ms(1);
+}
+
+void LCD_write_data(uint8_t data)
+{
+	PORT_CONTROL |= (1 << RS_PIN);	// 문자 출력에서 RS는 1
+  b0:	28 9a       	sbi	0x05, 0	; 5
+	PORT_DATA = data;			// 출력할 문자 데이터
+  b2:	8b b9       	out	0x0b, r24	; 11
+	LCD_pulse_enable();			// 문자 출력
+  b4:	0e 94 4b 00 	call	0x96	; 0x96 <LCD_pulse_enable>
+  b8:	08 95       	ret
+
+000000ba <LCD_write_command>:
+}
+
+void LCD_write_command(uint8_t command)
+{
+	PORT_CONTROL &= ~(1 << RS_PIN);	// 명령어 실행에서 RS는 0
+  ba:	28 98       	cbi	0x05, 0	; 5
+	PORT_DATA = command;		// 데이터 핀에 명령어 전달
+  bc:	8b b9       	out	0x0b, r24	; 11
+	LCD_pulse_enable();			// 명령어 실행
+  be:	0e 94 4b 00 	call	0x96	; 0x96 <LCD_pulse_enable>
+  c2:	08 95       	ret
+
+000000c4 <LCD_clear>:
+}
+
+void LCD_clear(void)
+{
+	LCD_write_command(COMMAND_CLEAR_DISPLAY);
+  c4:	81 e0       	ldi	r24, 0x01	; 1
+  c6:	0e 94 5d 00 	call	0xba	; 0xba <LCD_write_command>
+  ca:	8f e3       	ldi	r24, 0x3F	; 63
+  cc:	9f e1       	ldi	r25, 0x1F	; 31
+  ce:	01 97       	sbiw	r24, 0x01	; 1
+  d0:	f1 f7       	brne	.-4      	; 0xce <LCD_clear+0xa>
+  d2:	00 c0       	rjmp	.+0      	; 0xd4 <LCD_clear+0x10>
+  d4:	00 00       	nop
+  d6:	08 95       	ret
+
+000000d8 <LCD_init>:
+  d8:	2f ef       	ldi	r18, 0xFF	; 255
+  da:	80 e7       	ldi	r24, 0x70	; 112
+  dc:	92 e0       	ldi	r25, 0x02	; 2
+  de:	21 50       	subi	r18, 0x01	; 1
+  e0:	80 40       	sbci	r24, 0x00	; 0
+  e2:	90 40       	sbci	r25, 0x00	; 0
+  e4:	e1 f7       	brne	.-8      	; 0xde <LCD_init+0x6>
+  e6:	00 c0       	rjmp	.+0      	; 0xe8 <LCD_init+0x10>
+  e8:	00 00       	nop
+void LCD_init(void)
+{
+	_delay_ms(50);
+	
+	// 연결 핀을 출력으로 설정
+	DDR_DATA = 0xFF;
+  ea:	8f ef       	ldi	r24, 0xFF	; 255
+  ec:	8a b9       	out	0x0a, r24	; 10
+	DDR_CONTROL |= (1 << RS_PIN) | (1 << E_PIN);
+  ee:	84 b1       	in	r24, 0x04	; 4
+  f0:	83 60       	ori	r24, 0x03	; 3
+  f2:	84 b9       	out	0x04, r24	; 4
+	
+	LCD_write_command(COMMAND_8_BIT_MODE);		// 8비트 모드
+  f4:	88 e3       	ldi	r24, 0x38	; 56
+  f6:	0e 94 5d 00 	call	0xba	; 0xba <LCD_write_command>
+	
+	// display on/off control
+	// 화면 on, 커서 off, 커서 깜빡임 off
+	uint8_t command = 0x08 | (1 << COMMAND_DISPLAY_ON_OFF_BIT);
+	LCD_write_command(command);
+  fa:	8c e0       	ldi	r24, 0x0C	; 12
+  fc:	0e 94 5d 00 	call	0xba	; 0xba <LCD_write_command>
+
+	LCD_clear();			// 화면 지움
+ 100:	0e 94 62 00 	call	0xc4	; 0xc4 <LCD_clear>
+
+	// Entry Mode Set
+	// 출력 후 커서를 오른쪽으로 옮김, 즉, DDRAM의 주소가 증가하며 화면 이동은 없음
+	LCD_write_command(0x06);
+ 104:	86 e0       	ldi	r24, 0x06	; 6
+ 106:	0e 94 5d 00 	call	0xba	; 0xba <LCD_write_command>
+ 10a:	08 95       	ret
+
+0000010c <LCD_write_string>:
+}
+
+void LCD_write_string(char *string)
+{
+ 10c:	1f 93       	push	r17
+ 10e:	cf 93       	push	r28
+ 110:	df 93       	push	r29
+ 112:	ec 01       	movw	r28, r24
+	uint8_t i;
+	for(i = 0; string[i]; i++)			// 종료 문자를 만날 때까지
+ 114:	88 81       	ld	r24, Y
+ 116:	88 23       	and	r24, r24
+ 118:	51 f0       	breq	.+20     	; 0x12e <LCD_write_string+0x22>
+ 11a:	10 e0       	ldi	r17, 0x00	; 0
+	LCD_write_data(string[i]);		// 문자 단위 출력
+ 11c:	0e 94 58 00 	call	0xb0	; 0xb0 <LCD_write_data>
+}
+
+void LCD_write_string(char *string)
+{
+	uint8_t i;
+	for(i = 0; string[i]; i++)			// 종료 문자를 만날 때까지
+ 120:	1f 5f       	subi	r17, 0xFF	; 255
+ 122:	fe 01       	movw	r30, r28
+ 124:	e1 0f       	add	r30, r17
+ 126:	f1 1d       	adc	r31, r1
+ 128:	80 81       	ld	r24, Z
+ 12a:	81 11       	cpse	r24, r1
+ 12c:	f7 cf       	rjmp	.-18     	; 0x11c <LCD_write_string+0x10>
+	LCD_write_data(string[i]);		// 문자 단위 출력
+}
+ 12e:	df 91       	pop	r29
+ 130:	cf 91       	pop	r28
+ 132:	1f 91       	pop	r17
+ 134:	08 95       	ret
+
+00000136 <main>:
+	LCD_write_command(command);	// 커서 이동
+}
+
+int main(void)
+{
+	LCD_init();					// 텍스트 LCD 초기화
+ 136:	0e 94 6c 00 	call	0xd8	; 0xd8 <LCD_init>
+	
+	LCD_write_string("Hello World!");	// 문자열 출력
+ 13a:	80 e0       	ldi	r24, 0x00	; 0
+ 13c:	91 e0       	ldi	r25, 0x01	; 1
+ 13e:	0e 94 86 00 	call	0x10c	; 0x10c <LCD_write_string>
+ 142:	2f ef       	ldi	r18, 0xFF	; 255
+ 144:	83 ed       	ldi	r24, 0xD3	; 211
+ 146:	90 e3       	ldi	r25, 0x30	; 48
+ 148:	21 50       	subi	r18, 0x01	; 1
+ 14a:	80 40       	sbci	r24, 0x00	; 0
+ 14c:	90 40       	sbci	r25, 0x00	; 0
+ 14e:	e1 f7       	brne	.-8      	; 0x148 <main+0x12>
+ 150:	00 c0       	rjmp	.+0      	; 0x152 <main+0x1c>
+ 152:	00 00       	nop
+	
+	_delay_ms(1000);			// 1초 대기
+	
+	LCD_clear();				// 화면 지움
+ 154:	0e 94 62 00 	call	0xc4	; 0xc4 <LCD_clear>
+
+	// 첫째 라인 시작 주소는 0x00, 둘째 라인 시작 주소는 0x40
+	uint8_t address = (0x40 * row) + col;
+	uint8_t command = 0x80 + address;
+	
+	LCD_write_command(command);	// 커서 이동
+ 158:	80 e8       	ldi	r24, 0x80	; 128
+ 15a:	0e 94 5d 00 	call	0xba	; 0xba <LCD_write_command>
+	
+	LCD_clear();				// 화면 지움
+	
+	// 화면에 보이는 영역은 기본값으로 0~1행, 0~15열로 설정되어 있다.
+	LCD_goto_XY(0, 0);			// 0행 0열로 이동
+	LCD_write_data('1');			// 문자 단위 출력
+ 15e:	81 e3       	ldi	r24, 0x31	; 49
+ 160:	0e 94 58 00 	call	0xb0	; 0xb0 <LCD_write_data>
+
+	// 첫째 라인 시작 주소는 0x00, 둘째 라인 시작 주소는 0x40
+	uint8_t address = (0x40 * row) + col;
+	uint8_t command = 0x80 + address;
+	
+	LCD_write_command(command);	// 커서 이동
+ 164:	85 e8       	ldi	r24, 0x85	; 133
+ 166:	0e 94 5d 00 	call	0xba	; 0xba <LCD_write_command>
+	
+	// 화면에 보이는 영역은 기본값으로 0~1행, 0~15열로 설정되어 있다.
+	LCD_goto_XY(0, 0);			// 0행 0열로 이동
+	LCD_write_data('1');			// 문자 단위 출력
+	LCD_goto_XY(0, 5);
+	LCD_write_data('2');
+ 16a:	82 e3       	ldi	r24, 0x32	; 50
+ 16c:	0e 94 58 00 	call	0xb0	; 0xb0 <LCD_write_data>
+
+	// 첫째 라인 시작 주소는 0x00, 둘째 라인 시작 주소는 0x40
+	uint8_t address = (0x40 * row) + col;
+	uint8_t command = 0x80 + address;
+	
+	LCD_write_command(command);	// 커서 이동
+ 170:	80 ec       	ldi	r24, 0xC0	; 192
+ 172:	0e 94 5d 00 	call	0xba	; 0xba <LCD_write_command>
+	LCD_goto_XY(0, 0);			// 0행 0열로 이동
+	LCD_write_data('1');			// 문자 단위 출력
+	LCD_goto_XY(0, 5);
+	LCD_write_data('2');
+	LCD_goto_XY(1, 0);
+	LCD_write_data('3');
+ 176:	83 e3       	ldi	r24, 0x33	; 51
+ 178:	0e 94 58 00 	call	0xb0	; 0xb0 <LCD_write_data>
+
+	// 첫째 라인 시작 주소는 0x00, 둘째 라인 시작 주소는 0x40
+	uint8_t address = (0x40 * row) + col;
+	uint8_t command = 0x80 + address;
+	
+	LCD_write_command(command);	// 커서 이동
+ 17c:	85 ec       	ldi	r24, 0xC5	; 197
+ 17e:	0e 94 5d 00 	call	0xba	; 0xba <LCD_write_command>
+	LCD_goto_XY(0, 5);
+	LCD_write_data('2');
+	LCD_goto_XY(1, 0);
+	LCD_write_data('3');
+	LCD_goto_XY(1, 5);
+	LCD_write_data('4');
+ 182:	84 e3       	ldi	r24, 0x34	; 52
+ 184:	0e 94 58 00 	call	0xb0	; 0xb0 <LCD_write_data>
+ 188:	ff cf       	rjmp	.-2      	; 0x188 <main+0x52>
+
+0000018a <_exit>:
+ 18a:	f8 94       	cli
+
+0000018c <__stop_program>:
+ 18c:	ff cf       	rjmp	.-2      	; 0x18c <__stop_program>

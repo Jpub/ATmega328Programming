@@ -1,0 +1,225 @@
+
+CH_19_code_1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000000a  00800100  00000148  000001bc  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000148  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  000001c6  2**0
+                  CONTENTS, READONLY
+  3 .debug_aranges 00000020  00000000  00000000  000001f6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   00000142  00000000  00000000  00000216  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 000000f4  00000000  00000000  00000358  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   0000013e  00000000  00000000  0000044c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000034  00000000  00000000  0000058c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    00000187  00000000  00000000  000005c0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    00000088  00000000  00000000  00000747  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000010  00000000  00000000  000007cf  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   8:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  10:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  14:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  18:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  1c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  20:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  24:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  28:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  2c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  30:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  34:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  38:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  3c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  40:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  44:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  48:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  4c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  50:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  54:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  58:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  5c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  60:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  64:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e8 e4       	ldi	r30, 0x48	; 72
+  7c:	f1 e0       	ldi	r31, 0x01	; 1
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	aa 30       	cpi	r26, 0x0A	; 10
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+  8a:	0e 94 4b 00 	call	0x96	; 0x96 <main>
+  8e:	0c 94 a2 00 	jmp	0x144	; 0x144 <_exit>
+
+00000092 <__bad_interrupt>:
+  92:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000096 <main>:
+#define F_CPU 16000000L
+#include <avr/io.h>
+#include <util/delay.h>
+
+int main(void)
+{
+  96:	cf 93       	push	r28
+  98:	df 93       	push	r29
+  9a:	cd b7       	in	r28, 0x3d	; 61
+  9c:	de b7       	in	r29, 0x3e	; 62
+  9e:	2a 97       	sbiw	r28, 0x0a	; 10
+  a0:	0f b6       	in	r0, 0x3f	; 63
+  a2:	f8 94       	cli
+  a4:	de bf       	out	0x3e, r29	; 62
+  a6:	0f be       	out	0x3f, r0	; 63
+  a8:	cd bf       	out	0x3d, r28	; 61
+	uint8_t numbers[]
+  aa:	8a e0       	ldi	r24, 0x0A	; 10
+  ac:	e0 e0       	ldi	r30, 0x00	; 0
+  ae:	f1 e0       	ldi	r31, 0x01	; 1
+  b0:	de 01       	movw	r26, r28
+  b2:	11 96       	adiw	r26, 0x01	; 1
+  b4:	01 90       	ld	r0, Z+
+  b6:	0d 92       	st	X+, r0
+  b8:	8a 95       	dec	r24
+  ba:	e1 f7       	brne	.-8      	; 0xb4 <main+0x1e>
+	= {0xFC, 0x60, 0xDA, 0xF2, 0x66, 0xB6, 0xBE, 0xE4, 0xFE, 0xE6};
+	int count = 0;				// 현재 표시할 숫자
+	DDRD = 0xFF;				// 제어핀 8개를 출력으로 설정
+  bc:	8f ef       	ldi	r24, 0xFF	; 255
+  be:	8a b9       	out	0x0a, r24	; 10
+
+int main(void)
+{
+	uint8_t numbers[]
+	= {0xFC, 0x60, 0xDA, 0xF2, 0x66, 0xB6, 0xBE, 0xE4, 0xFE, 0xE6};
+	int count = 0;				// 현재 표시할 숫자
+  c0:	80 e0       	ldi	r24, 0x00	; 0
+  c2:	90 e0       	ldi	r25, 0x00	; 0
+	DDRD = 0xFF;				// 제어핀 8개를 출력으로 설정
+	
+	while(1)
+	{
+		PORTD = numbers[count];		// 숫자 데이터 출력
+		count = (count + 1) % 10;		// 다음에 표시할 숫자
+  c4:	2a e0       	ldi	r18, 0x0A	; 10
+  c6:	30 e0       	ldi	r19, 0x00	; 0
+	int count = 0;				// 현재 표시할 숫자
+	DDRD = 0xFF;				// 제어핀 8개를 출력으로 설정
+	
+	while(1)
+	{
+		PORTD = numbers[count];		// 숫자 데이터 출력
+  c8:	e1 e0       	ldi	r30, 0x01	; 1
+  ca:	f0 e0       	ldi	r31, 0x00	; 0
+  cc:	ec 0f       	add	r30, r28
+  ce:	fd 1f       	adc	r31, r29
+  d0:	e8 0f       	add	r30, r24
+  d2:	f9 1f       	adc	r31, r25
+  d4:	40 81       	ld	r20, Z
+  d6:	4b b9       	out	0x0b, r20	; 11
+		count = (count + 1) % 10;		// 다음에 표시할 숫자
+  d8:	01 96       	adiw	r24, 0x01	; 1
+  da:	b9 01       	movw	r22, r18
+  dc:	0e 94 7a 00 	call	0xf4	; 0xf4 <__divmodhi4>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  e0:	4f ef       	ldi	r20, 0xFF	; 255
+  e2:	51 ee       	ldi	r21, 0xE1	; 225
+  e4:	64 e0       	ldi	r22, 0x04	; 4
+  e6:	41 50       	subi	r20, 0x01	; 1
+  e8:	50 40       	sbci	r21, 0x00	; 0
+  ea:	60 40       	sbci	r22, 0x00	; 0
+  ec:	e1 f7       	brne	.-8      	; 0xe6 <main+0x50>
+  ee:	00 c0       	rjmp	.+0      	; 0xf0 <main+0x5a>
+  f0:	00 00       	nop
+  f2:	ea cf       	rjmp	.-44     	; 0xc8 <main+0x32>
+
+000000f4 <__divmodhi4>:
+  f4:	97 fb       	bst	r25, 7
+  f6:	07 2e       	mov	r0, r23
+  f8:	16 f4       	brtc	.+4      	; 0xfe <__divmodhi4+0xa>
+  fa:	00 94       	com	r0
+  fc:	07 d0       	rcall	.+14     	; 0x10c <__divmodhi4_neg1>
+  fe:	77 fd       	sbrc	r23, 7
+ 100:	09 d0       	rcall	.+18     	; 0x114 <__divmodhi4_neg2>
+ 102:	0e 94 8e 00 	call	0x11c	; 0x11c <__udivmodhi4>
+ 106:	07 fc       	sbrc	r0, 7
+ 108:	05 d0       	rcall	.+10     	; 0x114 <__divmodhi4_neg2>
+ 10a:	3e f4       	brtc	.+14     	; 0x11a <__divmodhi4_exit>
+
+0000010c <__divmodhi4_neg1>:
+ 10c:	90 95       	com	r25
+ 10e:	81 95       	neg	r24
+ 110:	9f 4f       	sbci	r25, 0xFF	; 255
+ 112:	08 95       	ret
+
+00000114 <__divmodhi4_neg2>:
+ 114:	70 95       	com	r23
+ 116:	61 95       	neg	r22
+ 118:	7f 4f       	sbci	r23, 0xFF	; 255
+
+0000011a <__divmodhi4_exit>:
+ 11a:	08 95       	ret
+
+0000011c <__udivmodhi4>:
+ 11c:	aa 1b       	sub	r26, r26
+ 11e:	bb 1b       	sub	r27, r27
+ 120:	51 e1       	ldi	r21, 0x11	; 17
+ 122:	07 c0       	rjmp	.+14     	; 0x132 <__udivmodhi4_ep>
+
+00000124 <__udivmodhi4_loop>:
+ 124:	aa 1f       	adc	r26, r26
+ 126:	bb 1f       	adc	r27, r27
+ 128:	a6 17       	cp	r26, r22
+ 12a:	b7 07       	cpc	r27, r23
+ 12c:	10 f0       	brcs	.+4      	; 0x132 <__udivmodhi4_ep>
+ 12e:	a6 1b       	sub	r26, r22
+ 130:	b7 0b       	sbc	r27, r23
+
+00000132 <__udivmodhi4_ep>:
+ 132:	88 1f       	adc	r24, r24
+ 134:	99 1f       	adc	r25, r25
+ 136:	5a 95       	dec	r21
+ 138:	a9 f7       	brne	.-22     	; 0x124 <__udivmodhi4_loop>
+ 13a:	80 95       	com	r24
+ 13c:	90 95       	com	r25
+ 13e:	bc 01       	movw	r22, r24
+ 140:	cd 01       	movw	r24, r26
+ 142:	08 95       	ret
+
+00000144 <_exit>:
+ 144:	f8 94       	cli
+
+00000146 <__stop_program>:
+ 146:	ff cf       	rjmp	.-2      	; 0x146 <__stop_program>

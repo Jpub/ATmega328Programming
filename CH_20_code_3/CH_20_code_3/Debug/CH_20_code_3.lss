@@ -1,0 +1,355 @@
+
+CH_20_code_3.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000008  00800100  000001da  0000024e  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000001da  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  00000256  2**0
+                  CONTENTS, READONLY
+  3 .debug_aranges 00000038  00000000  00000000  00000286  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   000001f7  00000000  00000000  000002be  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 0000017a  00000000  00000000  000004b5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   00000220  00000000  00000000  0000062f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000064  00000000  00000000  00000850  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    000001c9  00000000  00000000  000008b4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    000000b7  00000000  00000000  00000a7d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000040  00000000  00000000  00000b34  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   8:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  10:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  14:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  18:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  1c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  20:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  24:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  28:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  2c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  30:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  34:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  38:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  3c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  40:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  44:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  48:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  4c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  50:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  54:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  58:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  5c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  60:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  64:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	ea ed       	ldi	r30, 0xDA	; 218
+  7c:	f1 e0       	ldi	r31, 0x01	; 1
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	a8 30       	cpi	r26, 0x08	; 8
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+  8a:	0e 94 ae 00 	call	0x15c	; 0x15c <main>
+  8e:	0c 94 eb 00 	jmp	0x1d6	; 0x1d6 <_exit>
+
+00000092 <__bad_interrupt>:
+  92:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000096 <LEDMatrix_init>:
+#include "LEDMatrixTest.h"
+
+void LEDMatrix_init(void)
+{
+	// 해당 column 핀을 출력으로 설정
+	MATRIX_COL1_DDR |= (1 << MATRIX_COL1_PIN);
+  96:	22 9a       	sbi	0x04, 2	; 4
+	MATRIX_COL2_DDR |= (1 << MATRIX_COL2_PIN);
+  98:	23 9a       	sbi	0x04, 3	; 4
+	MATRIX_COL3_DDR |= (1 << MATRIX_COL3_PIN);
+  9a:	24 9a       	sbi	0x04, 4	; 4
+	MATRIX_COL4_DDR |= (1 << MATRIX_COL4_PIN);
+  9c:	25 9a       	sbi	0x04, 5	; 4
+	MATRIX_COL5_DDR |= (1 << MATRIX_COL5_PIN);
+  9e:	38 9a       	sbi	0x07, 0	; 7
+	MATRIX_COL6_DDR |= (1 << MATRIX_COL6_PIN);
+  a0:	39 9a       	sbi	0x07, 1	; 7
+	MATRIX_COL7_DDR |= (1 << MATRIX_COL7_PIN);
+  a2:	3a 9a       	sbi	0x07, 2	; 7
+	MATRIX_COL8_DDR |= (1 << MATRIX_COL8_PIN);
+  a4:	3b 9a       	sbi	0x07, 3	; 7
+	
+	// 해당 row 핀을 출력으로 설정
+	MATRIX_ROW1_DDR |= (1 << MATRIX_ROW1_PIN);
+  a6:	52 9a       	sbi	0x0a, 2	; 10
+	MATRIX_ROW2_DDR |= (1 << MATRIX_ROW2_PIN);
+  a8:	53 9a       	sbi	0x0a, 3	; 10
+	MATRIX_ROW3_DDR |= (1 << MATRIX_ROW3_PIN);
+  aa:	54 9a       	sbi	0x0a, 4	; 10
+	MATRIX_ROW4_DDR |= (1 << MATRIX_ROW4_PIN);
+  ac:	55 9a       	sbi	0x0a, 5	; 10
+	MATRIX_ROW5_DDR |= (1 << MATRIX_ROW5_PIN);
+  ae:	56 9a       	sbi	0x0a, 6	; 10
+	MATRIX_ROW6_DDR |= (1 << MATRIX_ROW6_PIN);
+  b0:	57 9a       	sbi	0x0a, 7	; 10
+	MATRIX_ROW7_DDR |= (1 << MATRIX_ROW7_PIN);
+  b2:	20 9a       	sbi	0x04, 0	; 4
+	MATRIX_ROW8_DDR |= (1 << MATRIX_ROW8_PIN);
+  b4:	21 9a       	sbi	0x04, 1	; 4
+  b6:	08 95       	ret
+
+000000b8 <LEDMatrix_writeColumn>:
+}
+
+void LEDMatrix_writeColumn(uint8_t col_data)	// column 데이터 출력
+{
+	if(col_data & (1 << 0))	MATRIX_COL1_PORT |= (1 << MATRIX_COL1_PIN); // ON
+  b8:	80 ff       	sbrs	r24, 0
+  ba:	02 c0       	rjmp	.+4      	; 0xc0 <LEDMatrix_writeColumn+0x8>
+  bc:	2a 9a       	sbi	0x05, 2	; 5
+  be:	01 c0       	rjmp	.+2      	; 0xc2 <LEDMatrix_writeColumn+0xa>
+	else MATRIX_COL1_PORT &= ~(1 << MATRIX_COL1_PIN);	// OFF
+  c0:	2a 98       	cbi	0x05, 2	; 5
+	if(col_data & (1 << 1))	MATRIX_COL2_PORT |= (1 << MATRIX_COL2_PIN);
+  c2:	81 ff       	sbrs	r24, 1
+  c4:	02 c0       	rjmp	.+4      	; 0xca <LEDMatrix_writeColumn+0x12>
+  c6:	2b 9a       	sbi	0x05, 3	; 5
+  c8:	01 c0       	rjmp	.+2      	; 0xcc <LEDMatrix_writeColumn+0x14>
+	else MATRIX_COL2_PORT &= ~(1 << MATRIX_COL2_PIN);
+  ca:	2b 98       	cbi	0x05, 3	; 5
+	if(col_data & (1 << 2))	MATRIX_COL3_PORT |= (1 << MATRIX_COL3_PIN);
+  cc:	82 ff       	sbrs	r24, 2
+  ce:	02 c0       	rjmp	.+4      	; 0xd4 <LEDMatrix_writeColumn+0x1c>
+  d0:	2c 9a       	sbi	0x05, 4	; 5
+  d2:	01 c0       	rjmp	.+2      	; 0xd6 <LEDMatrix_writeColumn+0x1e>
+	else MATRIX_COL3_PORT &= ~(1 << MATRIX_COL3_PIN);
+  d4:	2c 98       	cbi	0x05, 4	; 5
+	if(col_data & (1 << 3))	MATRIX_COL4_PORT |= (1 << MATRIX_COL4_PIN);
+  d6:	83 ff       	sbrs	r24, 3
+  d8:	02 c0       	rjmp	.+4      	; 0xde <LEDMatrix_writeColumn+0x26>
+  da:	2d 9a       	sbi	0x05, 5	; 5
+  dc:	01 c0       	rjmp	.+2      	; 0xe0 <LEDMatrix_writeColumn+0x28>
+	else MATRIX_COL4_PORT &= ~(1 << MATRIX_COL4_PIN);
+  de:	2d 98       	cbi	0x05, 5	; 5
+	if(col_data & (1 << 4))	MATRIX_COL5_PORT |= (1 << MATRIX_COL5_PIN);
+  e0:	84 ff       	sbrs	r24, 4
+  e2:	02 c0       	rjmp	.+4      	; 0xe8 <LEDMatrix_writeColumn+0x30>
+  e4:	40 9a       	sbi	0x08, 0	; 8
+  e6:	01 c0       	rjmp	.+2      	; 0xea <LEDMatrix_writeColumn+0x32>
+	else MATRIX_COL5_PORT &= ~(1 << MATRIX_COL5_PIN);
+  e8:	40 98       	cbi	0x08, 0	; 8
+	if(col_data & (1 << 5))	MATRIX_COL6_PORT |= (1 << MATRIX_COL6_PIN);
+  ea:	85 ff       	sbrs	r24, 5
+  ec:	02 c0       	rjmp	.+4      	; 0xf2 <LEDMatrix_writeColumn+0x3a>
+  ee:	41 9a       	sbi	0x08, 1	; 8
+  f0:	01 c0       	rjmp	.+2      	; 0xf4 <LEDMatrix_writeColumn+0x3c>
+	else MATRIX_COL6_PORT &= ~(1 << MATRIX_COL6_PIN);
+  f2:	41 98       	cbi	0x08, 1	; 8
+	if(col_data & (1 << 6))	MATRIX_COL7_PORT |= (1 << MATRIX_COL7_PIN);
+  f4:	86 ff       	sbrs	r24, 6
+  f6:	02 c0       	rjmp	.+4      	; 0xfc <LEDMatrix_writeColumn+0x44>
+  f8:	42 9a       	sbi	0x08, 2	; 8
+  fa:	01 c0       	rjmp	.+2      	; 0xfe <LEDMatrix_writeColumn+0x46>
+	else MATRIX_COL7_PORT &= ~(1 << MATRIX_COL7_PIN);
+  fc:	42 98       	cbi	0x08, 2	; 8
+	if(col_data & (1 << 7))	MATRIX_COL8_PORT |= (1 << MATRIX_COL8_PIN);
+  fe:	88 23       	and	r24, r24
+ 100:	14 f4       	brge	.+4      	; 0x106 <LEDMatrix_writeColumn+0x4e>
+ 102:	43 9a       	sbi	0x08, 3	; 8
+ 104:	08 95       	ret
+	else MATRIX_COL8_PORT &= ~(1 << MATRIX_COL8_PIN);
+ 106:	43 98       	cbi	0x08, 3	; 8
+ 108:	08 95       	ret
+
+0000010a <LEDMatrix_writeRow>:
+}
+
+void LEDMatrix_writeRow(uint8_t row_data)	// row 데이터 출력
+{
+	if(row_data & (1 << 7))	MATRIX_ROW1_PORT |= (1 << MATRIX_ROW1_PIN);
+ 10a:	88 23       	and	r24, r24
+ 10c:	14 f4       	brge	.+4      	; 0x112 <LEDMatrix_writeRow+0x8>
+ 10e:	5a 9a       	sbi	0x0b, 2	; 11
+ 110:	01 c0       	rjmp	.+2      	; 0x114 <LEDMatrix_writeRow+0xa>
+	else MATRIX_ROW1_PORT &= ~(1 << MATRIX_ROW1_PIN);
+ 112:	5a 98       	cbi	0x0b, 2	; 11
+	if(row_data & (1 << 6))	MATRIX_ROW2_PORT |= (1 << MATRIX_ROW2_PIN);
+ 114:	86 ff       	sbrs	r24, 6
+ 116:	02 c0       	rjmp	.+4      	; 0x11c <LEDMatrix_writeRow+0x12>
+ 118:	5b 9a       	sbi	0x0b, 3	; 11
+ 11a:	01 c0       	rjmp	.+2      	; 0x11e <LEDMatrix_writeRow+0x14>
+	else MATRIX_ROW2_PORT &= ~(1 << MATRIX_ROW2_PIN);
+ 11c:	5b 98       	cbi	0x0b, 3	; 11
+	if(row_data & (1 << 5))	MATRIX_ROW3_PORT |= (1 << MATRIX_ROW3_PIN);
+ 11e:	85 ff       	sbrs	r24, 5
+ 120:	02 c0       	rjmp	.+4      	; 0x126 <LEDMatrix_writeRow+0x1c>
+ 122:	5c 9a       	sbi	0x0b, 4	; 11
+ 124:	01 c0       	rjmp	.+2      	; 0x128 <LEDMatrix_writeRow+0x1e>
+	else MATRIX_ROW3_PORT &= ~(1 << MATRIX_ROW3_PIN);
+ 126:	5c 98       	cbi	0x0b, 4	; 11
+	if(row_data & (1 << 4))	MATRIX_ROW4_PORT |= (1 << MATRIX_ROW4_PIN);
+ 128:	84 ff       	sbrs	r24, 4
+ 12a:	02 c0       	rjmp	.+4      	; 0x130 <LEDMatrix_writeRow+0x26>
+ 12c:	5d 9a       	sbi	0x0b, 5	; 11
+ 12e:	01 c0       	rjmp	.+2      	; 0x132 <LEDMatrix_writeRow+0x28>
+	else MATRIX_ROW4_PORT &= ~(1 << MATRIX_ROW4_PIN);
+ 130:	5d 98       	cbi	0x0b, 5	; 11
+	if(row_data & (1 << 3))	MATRIX_ROW5_PORT |= (1 << MATRIX_ROW5_PIN);
+ 132:	83 ff       	sbrs	r24, 3
+ 134:	02 c0       	rjmp	.+4      	; 0x13a <LEDMatrix_writeRow+0x30>
+ 136:	5e 9a       	sbi	0x0b, 6	; 11
+ 138:	01 c0       	rjmp	.+2      	; 0x13c <LEDMatrix_writeRow+0x32>
+	else MATRIX_ROW5_PORT &= ~(1 << MATRIX_ROW5_PIN);
+ 13a:	5e 98       	cbi	0x0b, 6	; 11
+	if(row_data & (1 << 2))	MATRIX_ROW6_PORT |= (1 << MATRIX_ROW6_PIN);
+ 13c:	82 ff       	sbrs	r24, 2
+ 13e:	02 c0       	rjmp	.+4      	; 0x144 <LEDMatrix_writeRow+0x3a>
+ 140:	5f 9a       	sbi	0x0b, 7	; 11
+ 142:	01 c0       	rjmp	.+2      	; 0x146 <LEDMatrix_writeRow+0x3c>
+	else MATRIX_ROW6_PORT &= ~(1 << MATRIX_ROW6_PIN);
+ 144:	5f 98       	cbi	0x0b, 7	; 11
+	if(row_data & (1 << 1))	MATRIX_ROW7_PORT |= (1 << MATRIX_ROW7_PIN);
+ 146:	81 ff       	sbrs	r24, 1
+ 148:	02 c0       	rjmp	.+4      	; 0x14e <LEDMatrix_writeRow+0x44>
+ 14a:	28 9a       	sbi	0x05, 0	; 5
+ 14c:	01 c0       	rjmp	.+2      	; 0x150 <LEDMatrix_writeRow+0x46>
+	else MATRIX_ROW7_PORT &= ~(1 << MATRIX_ROW7_PIN);
+ 14e:	28 98       	cbi	0x05, 0	; 5
+	if(row_data & (1 << 0))	MATRIX_ROW8_PORT |= (1 << MATRIX_ROW8_PIN);
+ 150:	80 ff       	sbrs	r24, 0
+ 152:	02 c0       	rjmp	.+4      	; 0x158 <LEDMatrix_writeRow+0x4e>
+ 154:	29 9a       	sbi	0x05, 1	; 5
+ 156:	08 95       	ret
+	else MATRIX_ROW8_PORT &= ~(1 << MATRIX_ROW8_PIN);
+ 158:	29 98       	cbi	0x05, 1	; 5
+ 15a:	08 95       	ret
+
+0000015c <main>:
+}
+
+int main(void)
+{
+ 15c:	cf 93       	push	r28
+ 15e:	df 93       	push	r29
+ 160:	cd b7       	in	r28, 0x3d	; 61
+ 162:	de b7       	in	r29, 0x3e	; 62
+ 164:	28 97       	sbiw	r28, 0x08	; 8
+ 166:	0f b6       	in	r0, 0x3f	; 63
+ 168:	f8 94       	cli
+ 16a:	de bf       	out	0x3e, r29	; 62
+ 16c:	0f be       	out	0x3f, r0	; 63
+ 16e:	cd bf       	out	0x3d, r28	; 61
+	LEDMatrix_init();
+ 170:	0e 94 4b 00 	call	0x96	; 0x96 <LEDMatrix_init>
+	
+	uint8_t smile[] = {
+ 174:	88 e0       	ldi	r24, 0x08	; 8
+ 176:	e0 e0       	ldi	r30, 0x00	; 0
+ 178:	f1 e0       	ldi	r31, 0x01	; 1
+ 17a:	de 01       	movw	r26, r28
+ 17c:	11 96       	adiw	r26, 0x01	; 1
+ 17e:	01 90       	ld	r0, Z+
+ 180:	0d 92       	st	X+, r0
+ 182:	8a 95       	dec	r24
+ 184:	e1 f7       	brne	.-8      	; 0x17e <main+0x22>
+		0b01000010,
+	0b00111100 };
+
+	while(1)
+	{
+		for(int i = 0; i < 8; i++){
+ 186:	00 e0       	ldi	r16, 0x00	; 0
+ 188:	10 e0       	ldi	r17, 0x00	; 0
+			// 열 단위 스캔이므로 하나의 열에만 LOW를 가하고 나머지는 HIGH를 가함
+			uint8_t col_data = ~(1 << i);
+ 18a:	ee 24       	eor	r14, r14
+ 18c:	e3 94       	inc	r14
+ 18e:	f1 2c       	mov	r15, r1
+		0b01000010,
+	0b00111100 };
+
+	while(1)
+	{
+		for(int i = 0; i < 8; i++){
+ 190:	c1 2c       	mov	r12, r1
+ 192:	d1 2c       	mov	r13, r1
+			// 열 단위 스캔이므로 하나의 열에만 LOW를 가하고 나머지는 HIGH를 가함
+			uint8_t col_data = ~(1 << i);
+ 194:	c7 01       	movw	r24, r14
+ 196:	00 2e       	mov	r0, r16
+ 198:	02 c0       	rjmp	.+4      	; 0x19e <main+0x42>
+ 19a:	88 0f       	add	r24, r24
+ 19c:	99 1f       	adc	r25, r25
+ 19e:	0a 94       	dec	r0
+ 1a0:	e2 f7       	brpl	.-8      	; 0x19a <main+0x3e>
+			LEDMatrix_writeColumn(col_data);
+ 1a2:	80 95       	com	r24
+ 1a4:	0e 94 5c 00 	call	0xb8	; 0xb8 <LEDMatrix_writeColumn>
+			// 각 열에 대응하는 스마일 문자 데이터를 출력
+			LEDMatrix_writeRow(smile[i]);
+ 1a8:	e1 e0       	ldi	r30, 0x01	; 1
+ 1aa:	f0 e0       	ldi	r31, 0x00	; 0
+ 1ac:	ec 0f       	add	r30, r28
+ 1ae:	fd 1f       	adc	r31, r29
+ 1b0:	e0 0f       	add	r30, r16
+ 1b2:	f1 1f       	adc	r31, r17
+ 1b4:	80 81       	ld	r24, Z
+ 1b6:	0e 94 85 00 	call	0x10a	; 0x10a <LEDMatrix_writeRow>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 1ba:	8f e3       	ldi	r24, 0x3F	; 63
+ 1bc:	9f e1       	ldi	r25, 0x1F	; 31
+ 1be:	01 97       	sbiw	r24, 0x01	; 1
+ 1c0:	f1 f7       	brne	.-4      	; 0x1be <main+0x62>
+ 1c2:	00 c0       	rjmp	.+0      	; 0x1c4 <main+0x68>
+ 1c4:	00 00       	nop
+		0b01000010,
+	0b00111100 };
+
+	while(1)
+	{
+		for(int i = 0; i < 8; i++){
+ 1c6:	0f 5f       	subi	r16, 0xFF	; 255
+ 1c8:	1f 4f       	sbci	r17, 0xFF	; 255
+ 1ca:	08 30       	cpi	r16, 0x08	; 8
+ 1cc:	11 05       	cpc	r17, r1
+ 1ce:	14 f3       	brlt	.-60     	; 0x194 <main+0x38>
+ 1d0:	0c 2d       	mov	r16, r12
+ 1d2:	1d 2d       	mov	r17, r13
+ 1d4:	df cf       	rjmp	.-66     	; 0x194 <main+0x38>
+
+000001d6 <_exit>:
+ 1d6:	f8 94       	cli
+
+000001d8 <__stop_program>:
+ 1d8:	ff cf       	rjmp	.-2      	; 0x1d8 <__stop_program>

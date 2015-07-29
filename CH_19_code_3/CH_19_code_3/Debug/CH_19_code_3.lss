@@ -1,0 +1,375 @@
+
+CH_19_code_3.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000000a  00800100  00000240  000002d4  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000240  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000006  0080010a  0080010a  000002de  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000002de  2**0
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000030  00000000  00000000  0000030e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000001ac  00000000  00000000  0000033e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000000fa  00000000  00000000  000004ea  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000000ee  00000000  00000000  000005e4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  0000009c  00000000  00000000  000006d4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000197  00000000  00000000  00000770  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000001f8  00000000  00000000  00000907  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000020  00000000  00000000  00000aff  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__vector_16>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e0 e4       	ldi	r30, 0x40	; 64
+  7c:	f2 e0       	ldi	r31, 0x02	; 2
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	aa 30       	cpi	r26, 0x0A	; 10
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+  8a:	21 e0       	ldi	r18, 0x01	; 1
+  8c:	aa e0       	ldi	r26, 0x0A	; 10
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	a0 31       	cpi	r26, 0x10	; 16
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 ab 00 	call	0x156	; 0x156 <main>
+  9e:	0c 94 1e 01 	jmp	0x23c	; 0x23c <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <__vector_16>:
+#define MICROS_INCREMENT_PER_OVERFLOW ( MICROSECONDS_PER_TIMER0_OVERFLOW % 1000 )
+// 프로그램 시작 이후의 경과 시간
+volatile unsigned long timer0_millis = 0;
+volatile int timer0_micros = 0;
+ISR(TIMER0_OVF_vect)
+{
+  a6:	1f 92       	push	r1
+  a8:	0f 92       	push	r0
+  aa:	0f b6       	in	r0, 0x3f	; 63
+  ac:	0f 92       	push	r0
+  ae:	11 24       	eor	r1, r1
+  b0:	0f 93       	push	r16
+  b2:	1f 93       	push	r17
+  b4:	2f 93       	push	r18
+  b6:	3f 93       	push	r19
+  b8:	4f 93       	push	r20
+  ba:	5f 93       	push	r21
+  bc:	6f 93       	push	r22
+  be:	7f 93       	push	r23
+  c0:	8f 93       	push	r24
+  c2:	9f 93       	push	r25
+  c4:	af 93       	push	r26
+  c6:	bf 93       	push	r27
+	unsigned long m = timer0_millis;
+  c8:	00 91 0c 01 	lds	r16, 0x010C
+  cc:	10 91 0d 01 	lds	r17, 0x010D
+  d0:	20 91 0e 01 	lds	r18, 0x010E
+  d4:	30 91 0f 01 	lds	r19, 0x010F
+	int f = timer0_micros;
+  d8:	80 91 0a 01 	lds	r24, 0x010A
+  dc:	90 91 0b 01 	lds	r25, 0x010B
+	m += MILLIS_INCREMENT_PER_OVERFLOW; // 밀리초 단위 시간 증가
+  e0:	0f 5f       	subi	r16, 0xFF	; 255
+  e2:	1f 4f       	sbci	r17, 0xFF	; 255
+  e4:	2f 4f       	sbci	r18, 0xFF	; 255
+  e6:	3f 4f       	sbci	r19, 0xFF	; 255
+	f += MICROS_INCREMENT_PER_OVERFLOW; // 마이크로초 단위 시간 증가
+  e8:	48 96       	adiw	r24, 0x18	; 24
+	// 마이크로초가 1000을 넘어가면 밀리초를 증가시킴
+	int micro_to_millis = f / 1000;
+  ea:	68 ee       	ldi	r22, 0xE8	; 232
+  ec:	73 e0       	ldi	r23, 0x03	; 3
+  ee:	0e 94 f6 00 	call	0x1ec	; 0x1ec <__divmodhi4>
+	m += micro_to_millis;
+  f2:	ab 01       	movw	r20, r22
+  f4:	66 27       	eor	r22, r22
+  f6:	57 fd       	sbrc	r21, 7
+  f8:	60 95       	com	r22
+  fa:	76 2f       	mov	r23, r22
+  fc:	04 0f       	add	r16, r20
+  fe:	15 1f       	adc	r17, r21
+ 100:	26 1f       	adc	r18, r22
+ 102:	37 1f       	adc	r19, r23
+	f = f % 1000;
+	timer0_millis = m;
+ 104:	00 93 0c 01 	sts	0x010C, r16
+ 108:	10 93 0d 01 	sts	0x010D, r17
+ 10c:	20 93 0e 01 	sts	0x010E, r18
+ 110:	30 93 0f 01 	sts	0x010F, r19
+	timer0_micros = f;
+ 114:	90 93 0b 01 	sts	0x010B, r25
+ 118:	80 93 0a 01 	sts	0x010A, r24
+}
+ 11c:	bf 91       	pop	r27
+ 11e:	af 91       	pop	r26
+ 120:	9f 91       	pop	r25
+ 122:	8f 91       	pop	r24
+ 124:	7f 91       	pop	r23
+ 126:	6f 91       	pop	r22
+ 128:	5f 91       	pop	r21
+ 12a:	4f 91       	pop	r20
+ 12c:	3f 91       	pop	r19
+ 12e:	2f 91       	pop	r18
+ 130:	1f 91       	pop	r17
+ 132:	0f 91       	pop	r16
+ 134:	0f 90       	pop	r0
+ 136:	0f be       	out	0x3f, r0	; 63
+ 138:	0f 90       	pop	r0
+ 13a:	1f 90       	pop	r1
+ 13c:	18 95       	reti
+
+0000013e <millis>:
+unsigned long millis()
+{
+	unsigned long m;
+	uint8_t oldSREG = SREG; // 상태 레지스터 값 저장
+ 13e:	2f b7       	in	r18, 0x3f	; 63
+	// timer0_millis 값을 읽는 동안
+	// timer0_millis 값이 변하지 않도록 인터럽트를 비활성화
+	cli();
+ 140:	f8 94       	cli
+	m = timer0_millis;
+ 142:	60 91 0c 01 	lds	r22, 0x010C
+ 146:	70 91 0d 01 	lds	r23, 0x010D
+ 14a:	80 91 0e 01 	lds	r24, 0x010E
+ 14e:	90 91 0f 01 	lds	r25, 0x010F
+	SREG = oldSREG; // 이전 상태 레지스터 값 복원
+ 152:	2f bf       	out	0x3f, r18	; 63
+	return m; // 프로그램 시작 후 경과 시간
+}
+ 154:	08 95       	ret
+
+00000156 <main>:
+int main(void)
+{
+ 156:	cf 93       	push	r28
+ 158:	df 93       	push	r29
+ 15a:	cd b7       	in	r28, 0x3d	; 61
+ 15c:	de b7       	in	r29, 0x3e	; 62
+ 15e:	2a 97       	sbiw	r28, 0x0a	; 10
+ 160:	0f b6       	in	r0, 0x3f	; 63
+ 162:	f8 94       	cli
+ 164:	de bf       	out	0x3e, r29	; 62
+ 166:	0f be       	out	0x3f, r0	; 63
+ 168:	cd bf       	out	0x3d, r28	; 61
+	uint8_t numbers[]
+ 16a:	8a e0       	ldi	r24, 0x0A	; 10
+ 16c:	e0 e0       	ldi	r30, 0x00	; 0
+ 16e:	f1 e0       	ldi	r31, 0x01	; 1
+ 170:	de 01       	movw	r26, r28
+ 172:	11 96       	adiw	r26, 0x01	; 1
+ 174:	01 90       	ld	r0, Z+
+ 176:	0d 92       	st	X+, r0
+ 178:	8a 95       	dec	r24
+ 17a:	e1 f7       	brne	.-8      	; 0x174 <main+0x1e>
+	= {0xFC, 0x60, 0xDA, 0xF2, 0x66, 0xB6, 0xBE, 0xE4, 0xFE, 0xE6};
+	int count = 0;
+	DDRD = 0xFF;
+ 17c:	8f ef       	ldi	r24, 0xFF	; 255
+ 17e:	8a b9       	out	0x0a, r24	; 10
+	PORTD = numbers[0];
+ 180:	89 81       	ldd	r24, Y+1	; 0x01
+ 182:	8b b9       	out	0x0b, r24	; 11
+	TCCR0B |= (1 << CS01) | (1 << CS00); // 분주비를 64로 설정
+ 184:	85 b5       	in	r24, 0x25	; 37
+ 186:	83 60       	ori	r24, 0x03	; 3
+ 188:	85 bd       	out	0x25, r24	; 37
+	TIMSK0 |= (1 << TOIE0); // 오버플로 인터럽트 허용
+ 18a:	ee e6       	ldi	r30, 0x6E	; 110
+ 18c:	f0 e0       	ldi	r31, 0x00	; 0
+ 18e:	80 81       	ld	r24, Z
+ 190:	81 60       	ori	r24, 0x01	; 1
+ 192:	80 83       	st	Z, r24
+	sei(); // 전역적으로 인터럽트 허용
+ 194:	78 94       	sei
+	unsigned long time_previous, time_current;
+	time_previous = millis(); // 시작 시간
+ 196:	0e 94 9f 00 	call	0x13e	; 0x13e <millis>
+ 19a:	4b 01       	movw	r8, r22
+ 19c:	5c 01       	movw	r10, r24
+}
+int main(void)
+{
+	uint8_t numbers[]
+	= {0xFC, 0x60, 0xDA, 0xF2, 0x66, 0xB6, 0xBE, 0xE4, 0xFE, 0xE6};
+	int count = 0;
+ 19e:	e1 2c       	mov	r14, r1
+ 1a0:	f1 2c       	mov	r15, r1
+	while(1)
+	{
+		time_current = millis(); // 현재 시간
+		if((time_current - time_previous) > 1000){ // 1초 경과
+			time_previous = time_current;
+			count = (count + 1) % 10;
+ 1a2:	0f 2e       	mov	r0, r31
+ 1a4:	fa e0       	ldi	r31, 0x0A	; 10
+ 1a6:	cf 2e       	mov	r12, r31
+ 1a8:	d1 2c       	mov	r13, r1
+ 1aa:	f0 2d       	mov	r31, r0
+	sei(); // 전역적으로 인터럽트 허용
+	unsigned long time_previous, time_current;
+	time_previous = millis(); // 시작 시간
+	while(1)
+	{
+		time_current = millis(); // 현재 시간
+ 1ac:	0e 94 9f 00 	call	0x13e	; 0x13e <millis>
+ 1b0:	8b 01       	movw	r16, r22
+ 1b2:	9c 01       	movw	r18, r24
+		if((time_current - time_previous) > 1000){ // 1초 경과
+ 1b4:	dc 01       	movw	r26, r24
+ 1b6:	cb 01       	movw	r24, r22
+ 1b8:	88 19       	sub	r24, r8
+ 1ba:	99 09       	sbc	r25, r9
+ 1bc:	aa 09       	sbc	r26, r10
+ 1be:	bb 09       	sbc	r27, r11
+ 1c0:	89 3e       	cpi	r24, 0xE9	; 233
+ 1c2:	93 40       	sbci	r25, 0x03	; 3
+ 1c4:	a1 05       	cpc	r26, r1
+ 1c6:	b1 05       	cpc	r27, r1
+ 1c8:	88 f3       	brcs	.-30     	; 0x1ac <main+0x56>
+			time_previous = time_current;
+			count = (count + 1) % 10;
+ 1ca:	c7 01       	movw	r24, r14
+ 1cc:	01 96       	adiw	r24, 0x01	; 1
+ 1ce:	b6 01       	movw	r22, r12
+ 1d0:	0e 94 f6 00 	call	0x1ec	; 0x1ec <__divmodhi4>
+ 1d4:	7c 01       	movw	r14, r24
+			PORTD = numbers[count];
+ 1d6:	e1 e0       	ldi	r30, 0x01	; 1
+ 1d8:	f0 e0       	ldi	r31, 0x00	; 0
+ 1da:	ec 0f       	add	r30, r28
+ 1dc:	fd 1f       	adc	r31, r29
+ 1de:	e8 0f       	add	r30, r24
+ 1e0:	f9 1f       	adc	r31, r25
+ 1e2:	80 81       	ld	r24, Z
+ 1e4:	8b b9       	out	0x0b, r24	; 11
+	sei(); // 전역적으로 인터럽트 허용
+	unsigned long time_previous, time_current;
+	time_previous = millis(); // 시작 시간
+	while(1)
+	{
+		time_current = millis(); // 현재 시간
+ 1e6:	48 01       	movw	r8, r16
+ 1e8:	59 01       	movw	r10, r18
+ 1ea:	e0 cf       	rjmp	.-64     	; 0x1ac <main+0x56>
+
+000001ec <__divmodhi4>:
+ 1ec:	97 fb       	bst	r25, 7
+ 1ee:	07 2e       	mov	r0, r23
+ 1f0:	16 f4       	brtc	.+4      	; 0x1f6 <__divmodhi4+0xa>
+ 1f2:	00 94       	com	r0
+ 1f4:	07 d0       	rcall	.+14     	; 0x204 <__divmodhi4_neg1>
+ 1f6:	77 fd       	sbrc	r23, 7
+ 1f8:	09 d0       	rcall	.+18     	; 0x20c <__divmodhi4_neg2>
+ 1fa:	0e 94 0a 01 	call	0x214	; 0x214 <__udivmodhi4>
+ 1fe:	07 fc       	sbrc	r0, 7
+ 200:	05 d0       	rcall	.+10     	; 0x20c <__divmodhi4_neg2>
+ 202:	3e f4       	brtc	.+14     	; 0x212 <__divmodhi4_exit>
+
+00000204 <__divmodhi4_neg1>:
+ 204:	90 95       	com	r25
+ 206:	81 95       	neg	r24
+ 208:	9f 4f       	sbci	r25, 0xFF	; 255
+ 20a:	08 95       	ret
+
+0000020c <__divmodhi4_neg2>:
+ 20c:	70 95       	com	r23
+ 20e:	61 95       	neg	r22
+ 210:	7f 4f       	sbci	r23, 0xFF	; 255
+
+00000212 <__divmodhi4_exit>:
+ 212:	08 95       	ret
+
+00000214 <__udivmodhi4>:
+ 214:	aa 1b       	sub	r26, r26
+ 216:	bb 1b       	sub	r27, r27
+ 218:	51 e1       	ldi	r21, 0x11	; 17
+ 21a:	07 c0       	rjmp	.+14     	; 0x22a <__udivmodhi4_ep>
+
+0000021c <__udivmodhi4_loop>:
+ 21c:	aa 1f       	adc	r26, r26
+ 21e:	bb 1f       	adc	r27, r27
+ 220:	a6 17       	cp	r26, r22
+ 222:	b7 07       	cpc	r27, r23
+ 224:	10 f0       	brcs	.+4      	; 0x22a <__udivmodhi4_ep>
+ 226:	a6 1b       	sub	r26, r22
+ 228:	b7 0b       	sbc	r27, r23
+
+0000022a <__udivmodhi4_ep>:
+ 22a:	88 1f       	adc	r24, r24
+ 22c:	99 1f       	adc	r25, r25
+ 22e:	5a 95       	dec	r21
+ 230:	a9 f7       	brne	.-22     	; 0x21c <__udivmodhi4_loop>
+ 232:	80 95       	com	r24
+ 234:	90 95       	com	r25
+ 236:	bc 01       	movw	r22, r24
+ 238:	cd 01       	movw	r24, r26
+ 23a:	08 95       	ret
+
+0000023c <_exit>:
+ 23c:	f8 94       	cli
+
+0000023e <__stop_program>:
+ 23e:	ff cf       	rjmp	.-2      	; 0x23e <__stop_program>

@@ -1,0 +1,596 @@
+
+CH_17_code_8.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000008a  00800100  00000378  000003ec  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000378  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  00000476  2**0
+                  CONTENTS, READONLY
+  3 .debug_aranges 000000c8  00000000  00000000  000004a6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   00000896  00000000  00000000  0000056e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 00000383  00000000  00000000  00000e04  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   00000444  00000000  00000000  00001187  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  000001d8  00000000  00000000  000015cc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    0000028e  00000000  00000000  000017a4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    000005a1  00000000  00000000  00001a32  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000098  00000000  00000000  00001fd3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   8:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  10:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  14:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  18:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  1c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  20:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  24:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  28:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  2c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  30:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  34:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  38:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  3c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  40:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  44:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  48:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  4c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  50:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  54:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  58:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  5c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  60:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  64:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e8 e7       	ldi	r30, 0x78	; 120
+  7c:	f3 e0       	ldi	r31, 0x03	; 3
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	aa 38       	cpi	r26, 0x8A	; 138
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+  8a:	0e 94 7c 00 	call	0xf8	; 0xf8 <main>
+  8e:	0c 94 ba 01 	jmp	0x374	; 0x374 <_exit>
+
+00000092 <__bad_interrupt>:
+  92:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000096 <bcd_to_decimal>:
+#include <avr/io.h>
+#include <util/delay.h>
+#include "UART.h"
+#include "I2C.h"
+uint8_t bcd_to_decimal(uint8_t bcd){ // BCD 형식 -> 이진수 형식
+	return (bcd >> 4) * 10 + (bcd & 0x0F);
+  96:	98 2f       	mov	r25, r24
+  98:	92 95       	swap	r25
+  9a:	9f 70       	andi	r25, 0x0F	; 15
+  9c:	99 0f       	add	r25, r25
+  9e:	29 2f       	mov	r18, r25
+  a0:	22 0f       	add	r18, r18
+  a2:	22 0f       	add	r18, r18
+  a4:	92 0f       	add	r25, r18
+  a6:	8f 70       	andi	r24, 0x0F	; 15
+}
+  a8:	89 0f       	add	r24, r25
+  aa:	08 95       	ret
+
+000000ac <decimal_to_bcd>:
+uint8_t decimal_to_bcd(uint8_t decimal){ // 이진수 형식 -> BCD 형식
+	return ( ((decimal / 10) << 4) | (decimal % 10) );
+  ac:	9d ec       	ldi	r25, 0xCD	; 205
+  ae:	89 9f       	mul	r24, r25
+  b0:	91 2d       	mov	r25, r1
+  b2:	11 24       	eor	r1, r1
+  b4:	96 95       	lsr	r25
+  b6:	96 95       	lsr	r25
+  b8:	96 95       	lsr	r25
+  ba:	40 e1       	ldi	r20, 0x10	; 16
+  bc:	94 9f       	mul	r25, r20
+  be:	90 01       	movw	r18, r0
+  c0:	11 24       	eor	r1, r1
+  c2:	99 0f       	add	r25, r25
+  c4:	39 2f       	mov	r19, r25
+  c6:	33 0f       	add	r19, r19
+  c8:	33 0f       	add	r19, r19
+  ca:	93 0f       	add	r25, r19
+  cc:	89 1b       	sub	r24, r25
+}
+  ce:	82 2b       	or	r24, r18
+  d0:	08 95       	ret
+
+000000d2 <write_message>:
+void write_message(uint8_t no, char *message){ // RTC 모듈 데이터 출력
+  d2:	1f 93       	push	r17
+  d4:	cf 93       	push	r28
+  d6:	df 93       	push	r29
+  d8:	18 2f       	mov	r17, r24
+  da:	eb 01       	movw	r28, r22
+	UART_printString(" ");
+  dc:	87 e0       	ldi	r24, 0x07	; 7
+  de:	91 e0       	ldi	r25, 0x01	; 1
+  e0:	0e 94 5e 01 	call	0x2bc	; 0x2bc <UART_printString>
+	UART_print8bitNumber(no);
+  e4:	81 2f       	mov	r24, r17
+  e6:	0e 94 6d 01 	call	0x2da	; 0x2da <UART_print8bitNumber>
+	UART_printString(message);
+  ea:	ce 01       	movw	r24, r28
+  ec:	0e 94 5e 01 	call	0x2bc	; 0x2bc <UART_printString>
+}
+  f0:	df 91       	pop	r29
+  f2:	cf 91       	pop	r28
+  f4:	1f 91       	pop	r17
+  f6:	08 95       	ret
+
+000000f8 <main>:
+int main(void)
+{
+  f8:	cf 93       	push	r28
+  fa:	df 93       	push	r29
+  fc:	cd b7       	in	r28, 0x3d	; 61
+  fe:	de b7       	in	r29, 0x3e	; 62
+ 100:	27 97       	sbiw	r28, 0x07	; 7
+ 102:	0f b6       	in	r0, 0x3f	; 63
+ 104:	f8 94       	cli
+ 106:	de bf       	out	0x3e, r29	; 62
+ 108:	0f be       	out	0x3f, r0	; 63
+ 10a:	cd bf       	out	0x3d, r28	; 61
+	uint8_t i;
+	I2C_init(); // I2C 초기화
+ 10c:	0e 94 12 01 	call	0x224	; 0x224 <I2C_init>
+	UART_INIT(); // UART 초기화
+ 110:	0e 94 3e 01 	call	0x27c	; 0x27c <UART_INIT>
+	uint8_t address = 0x68; // RTC 모듈의 I2C 주소
+	// 초, 분, 시, 요일, 일, 월, 년
+	// 2014년 9월 1일 월요일 12시 34분 56초
+	uint8_t data[] = {56, 34, 12, 2, 1, 9, 14};
+ 114:	87 e0       	ldi	r24, 0x07	; 7
+ 116:	e0 e0       	ldi	r30, 0x00	; 0
+ 118:	f1 e0       	ldi	r31, 0x01	; 1
+ 11a:	de 01       	movw	r26, r28
+ 11c:	11 96       	adiw	r26, 0x01	; 1
+ 11e:	01 90       	ld	r0, Z+
+ 120:	0d 92       	st	X+, r0
+ 122:	8a 95       	dec	r24
+ 124:	e1 f7       	brne	.-8      	; 0x11e <main+0x26>
+	// RTC 모듈에 시간 설정
+	I2C_start(); // I2C 시작
+ 126:	0e 94 1b 01 	call	0x236	; 0x236 <I2C_start>
+	I2C_transmit(address << 1); // I2C 주소 전송. 쓰기 모드
+ 12a:	80 ed       	ldi	r24, 0xD0	; 208
+ 12c:	0e 94 24 01 	call	0x248	; 0x248 <I2C_transmit>
+	// RTC에 데이터를 기록할 메모리 시작 주소 전송
+	I2C_transmit(0);
+ 130:	80 e0       	ldi	r24, 0x00	; 0
+ 132:	0e 94 24 01 	call	0x248	; 0x248 <I2C_transmit>
+	UART_printString("* Setting RTC module...\n");
+ 136:	89 e0       	ldi	r24, 0x09	; 9
+ 138:	91 e0       	ldi	r25, 0x01	; 1
+ 13a:	0e 94 5e 01 	call	0x2bc	; 0x2bc <UART_printString>
+ 13e:	8e 01       	movw	r16, r28
+ 140:	0f 5f       	subi	r16, 0xFF	; 255
+ 142:	1f 4f       	sbci	r17, 0xFF	; 255
+	for(i = 0; i < 7; i++){
+ 144:	f1 2c       	mov	r15, r1
+		UART_printString(" ");
+ 146:	87 e0       	ldi	r24, 0x07	; 7
+ 148:	91 e0       	ldi	r25, 0x01	; 1
+ 14a:	0e 94 5e 01 	call	0x2bc	; 0x2bc <UART_printString>
+		UART_print8bitNumber(i);
+ 14e:	8f 2d       	mov	r24, r15
+ 150:	0e 94 6d 01 	call	0x2da	; 0x2da <UART_print8bitNumber>
+		UART_printString("th byte write...\n");
+ 154:	82 e2       	ldi	r24, 0x22	; 34
+ 156:	91 e0       	ldi	r25, 0x01	; 1
+ 158:	0e 94 5e 01 	call	0x2bc	; 0x2bc <UART_printString>
+		I2C_transmit(decimal_to_bcd(data[i])); // 시간 설정
+ 15c:	f8 01       	movw	r30, r16
+ 15e:	81 91       	ld	r24, Z+
+ 160:	8f 01       	movw	r16, r30
+ 162:	0e 94 56 00 	call	0xac	; 0xac <decimal_to_bcd>
+ 166:	0e 94 24 01 	call	0x248	; 0x248 <I2C_transmit>
+	I2C_start(); // I2C 시작
+	I2C_transmit(address << 1); // I2C 주소 전송. 쓰기 모드
+	// RTC에 데이터를 기록할 메모리 시작 주소 전송
+	I2C_transmit(0);
+	UART_printString("* Setting RTC module...\n");
+	for(i = 0; i < 7; i++){
+ 16a:	f3 94       	inc	r15
+ 16c:	f7 e0       	ldi	r31, 0x07	; 7
+ 16e:	ff 12       	cpse	r15, r31
+ 170:	ea cf       	rjmp	.-44     	; 0x146 <main+0x4e>
+		UART_printString(" ");
+		UART_print8bitNumber(i);
+		UART_printString("th byte write...\n");
+		I2C_transmit(decimal_to_bcd(data[i])); // 시간 설정
+	}
+	I2C_stop(); // I2C 정지
+ 172:	0e 94 3a 01 	call	0x274	; 0x274 <I2C_stop>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 176:	2f ef       	ldi	r18, 0xFF	; 255
+ 178:	87 ea       	ldi	r24, 0xA7	; 167
+ 17a:	91 e6       	ldi	r25, 0x61	; 97
+ 17c:	21 50       	subi	r18, 0x01	; 1
+ 17e:	80 40       	sbci	r24, 0x00	; 0
+ 180:	90 40       	sbci	r25, 0x00	; 0
+ 182:	e1 f7       	brne	.-8      	; 0x17c <main+0x84>
+ 184:	00 c0       	rjmp	.+0      	; 0x186 <main+0x8e>
+ 186:	00 00       	nop
+	_delay_ms(2000); // 2초 대기
+	I2C_start(); // I2C 시작
+ 188:	0e 94 1b 01 	call	0x236	; 0x236 <I2C_start>
+	I2C_transmit(address << 1); // I2C 주소 전송. 쓰기 모드
+ 18c:	80 ed       	ldi	r24, 0xD0	; 208
+ 18e:	0e 94 24 01 	call	0x248	; 0x248 <I2C_transmit>
+	// RTC에서 데이터를 읽어 올 메모리 시작 주소 전송
+	I2C_transmit(0);
+ 192:	80 e0       	ldi	r24, 0x00	; 0
+ 194:	0e 94 24 01 	call	0x248	; 0x248 <I2C_transmit>
+	I2C_stop(); // I2C 정지
+ 198:	0e 94 3a 01 	call	0x274	; 0x274 <I2C_stop>
+	I2C_start(); // I2C 읽기 모드로 다시 시작
+ 19c:	0e 94 1b 01 	call	0x236	; 0x236 <I2C_start>
+	I2C_transmit( (address << 1) + 1 ); // I2C 주소 전송. 읽기 모드
+ 1a0:	81 ed       	ldi	r24, 0xD1	; 209
+ 1a2:	0e 94 24 01 	call	0x248	; 0x248 <I2C_transmit>
+	UART_printString("* Time/Date Retrieval...\n");
+ 1a6:	84 e3       	ldi	r24, 0x34	; 52
+ 1a8:	91 e0       	ldi	r25, 0x01	; 1
+ 1aa:	0e 94 5e 01 	call	0x2bc	; 0x2bc <UART_printString>
+	write_message(bcd_to_decimal(I2C_receive()), " second\n");
+ 1ae:	0e 94 2f 01 	call	0x25e	; 0x25e <I2C_receive>
+ 1b2:	0e 94 4b 00 	call	0x96	; 0x96 <bcd_to_decimal>
+ 1b6:	6e e4       	ldi	r22, 0x4E	; 78
+ 1b8:	71 e0       	ldi	r23, 0x01	; 1
+ 1ba:	0e 94 69 00 	call	0xd2	; 0xd2 <write_message>
+	write_message(bcd_to_decimal(I2C_receive()), " minute\n");
+ 1be:	0e 94 2f 01 	call	0x25e	; 0x25e <I2C_receive>
+ 1c2:	0e 94 4b 00 	call	0x96	; 0x96 <bcd_to_decimal>
+ 1c6:	67 e5       	ldi	r22, 0x57	; 87
+ 1c8:	71 e0       	ldi	r23, 0x01	; 1
+ 1ca:	0e 94 69 00 	call	0xd2	; 0xd2 <write_message>
+	write_message(bcd_to_decimal(I2C_receive()), " hour\n");
+ 1ce:	0e 94 2f 01 	call	0x25e	; 0x25e <I2C_receive>
+ 1d2:	0e 94 4b 00 	call	0x96	; 0x96 <bcd_to_decimal>
+ 1d6:	60 e6       	ldi	r22, 0x60	; 96
+ 1d8:	71 e0       	ldi	r23, 0x01	; 1
+ 1da:	0e 94 69 00 	call	0xd2	; 0xd2 <write_message>
+	write_message(bcd_to_decimal(I2C_receive()), " day of week\n");
+ 1de:	0e 94 2f 01 	call	0x25e	; 0x25e <I2C_receive>
+ 1e2:	0e 94 4b 00 	call	0x96	; 0x96 <bcd_to_decimal>
+ 1e6:	67 e6       	ldi	r22, 0x67	; 103
+ 1e8:	71 e0       	ldi	r23, 0x01	; 1
+ 1ea:	0e 94 69 00 	call	0xd2	; 0xd2 <write_message>
+	write_message(bcd_to_decimal(I2C_receive()), " day\n");
+ 1ee:	0e 94 2f 01 	call	0x25e	; 0x25e <I2C_receive>
+ 1f2:	0e 94 4b 00 	call	0x96	; 0x96 <bcd_to_decimal>
+ 1f6:	65 e7       	ldi	r22, 0x75	; 117
+ 1f8:	71 e0       	ldi	r23, 0x01	; 1
+ 1fa:	0e 94 69 00 	call	0xd2	; 0xd2 <write_message>
+	write_message(bcd_to_decimal(I2C_receive()), " month\n");
+ 1fe:	0e 94 2f 01 	call	0x25e	; 0x25e <I2C_receive>
+ 202:	0e 94 4b 00 	call	0x96	; 0x96 <bcd_to_decimal>
+ 206:	6b e7       	ldi	r22, 0x7B	; 123
+ 208:	71 e0       	ldi	r23, 0x01	; 1
+ 20a:	0e 94 69 00 	call	0xd2	; 0xd2 <write_message>
+	write_message(bcd_to_decimal(I2C_receive()), " year\n");
+ 20e:	0e 94 2f 01 	call	0x25e	; 0x25e <I2C_receive>
+ 212:	0e 94 4b 00 	call	0x96	; 0x96 <bcd_to_decimal>
+ 216:	63 e8       	ldi	r22, 0x83	; 131
+ 218:	71 e0       	ldi	r23, 0x01	; 1
+ 21a:	0e 94 69 00 	call	0xd2	; 0xd2 <write_message>
+	I2C_stop(); // I2C 정지
+ 21e:	0e 94 3a 01 	call	0x274	; 0x274 <I2C_stop>
+ 222:	ff cf       	rjmp	.-2      	; 0x222 <main+0x12a>
+
+00000224 <I2C_init>:
+﻿#include "I2C.h"
+void I2C_init(void) {
+	DDRC |= (1 << I2C_SCL); // SCL 핀을 출력으로 설정
+ 224:	3d 9a       	sbi	0x07, 5	; 7
+	DDRC |= (1 << I2C_SDA); // SDA 핀을 출력으로 설정
+ 226:	3c 9a       	sbi	0x07, 4	; 7
+	TWBR = 32; // I2C 클록 주파수 설정 200KHz
+ 228:	80 e2       	ldi	r24, 0x20	; 32
+ 22a:	80 93 b8 00 	sts	0x00B8, r24
+	TWCR = (1 << TWEN) | (1 << TWEA); // I2C 활성화, ACK 허용
+ 22e:	84 e4       	ldi	r24, 0x44	; 68
+ 230:	80 93 bc 00 	sts	0x00BC, r24
+ 234:	08 95       	ret
+
+00000236 <I2C_start>:
+}
+void I2C_start(void) {
+	TWCR = _BV(TWINT) | _BV(TWSTA) | _BV(TWEN) | _BV(TWEA);
+ 236:	84 ee       	ldi	r24, 0xE4	; 228
+ 238:	80 93 bc 00 	sts	0x00BC, r24
+	while( !(TWCR & (1 << TWINT)) ); // 시작 완료 대기
+ 23c:	ec eb       	ldi	r30, 0xBC	; 188
+ 23e:	f0 e0       	ldi	r31, 0x00	; 0
+ 240:	80 81       	ld	r24, Z
+ 242:	88 23       	and	r24, r24
+ 244:	ec f7       	brge	.-6      	; 0x240 <I2C_start+0xa>
+}
+ 246:	08 95       	ret
+
+00000248 <I2C_transmit>:
+void I2C_transmit(uint8_t data) {
+	TWDR = data;
+ 248:	80 93 bb 00 	sts	0x00BB, r24
+	TWCR = _BV(TWINT) | _BV(TWEN) | _BV(TWEA);
+ 24c:	84 ec       	ldi	r24, 0xC4	; 196
+ 24e:	80 93 bc 00 	sts	0x00BC, r24
+	while( !(TWCR & (1 << TWINT)) ); // 전송 완료 대기
+ 252:	ec eb       	ldi	r30, 0xBC	; 188
+ 254:	f0 e0       	ldi	r31, 0x00	; 0
+ 256:	80 81       	ld	r24, Z
+ 258:	88 23       	and	r24, r24
+ 25a:	ec f7       	brge	.-6      	; 0x256 <I2C_transmit+0xe>
+}
+ 25c:	08 95       	ret
+
+0000025e <I2C_receive>:
+uint8_t I2C_receive(void) {
+	TWCR = _BV(TWINT) | _BV(TWEN) | _BV(TWEA);
+ 25e:	84 ec       	ldi	r24, 0xC4	; 196
+ 260:	80 93 bc 00 	sts	0x00BC, r24
+	while( !(TWCR & (1 << TWINT)) ); // 수신 완료 대기
+ 264:	ec eb       	ldi	r30, 0xBC	; 188
+ 266:	f0 e0       	ldi	r31, 0x00	; 0
+ 268:	80 81       	ld	r24, Z
+ 26a:	88 23       	and	r24, r24
+ 26c:	ec f7       	brge	.-6      	; 0x268 <I2C_receive+0xa>
+	return TWDR;
+ 26e:	80 91 bb 00 	lds	r24, 0x00BB
+}
+ 272:	08 95       	ret
+
+00000274 <I2C_stop>:
+void I2C_stop(void) {
+	TWCR = _BV(TWINT) | _BV(TWSTO) | _BV(TWEN) | _BV(TWEA);
+ 274:	84 ed       	ldi	r24, 0xD4	; 212
+ 276:	80 93 bc 00 	sts	0x00BC, r24
+ 27a:	08 95       	ret
+
+0000027c <UART_INIT>:
+ */ 
+
+#include "UART.h"
+
+void UART_INIT(void) {
+	UCSR0A |= _BV(U2X0);
+ 27c:	e0 ec       	ldi	r30, 0xC0	; 192
+ 27e:	f0 e0       	ldi	r31, 0x00	; 0
+ 280:	80 81       	ld	r24, Z
+ 282:	82 60       	ori	r24, 0x02	; 2
+ 284:	80 83       	st	Z, r24
+
+	UBRR0H = 0x00;
+ 286:	10 92 c5 00 	sts	0x00C5, r1
+	UBRR0L = 207;
+ 28a:	8f ec       	ldi	r24, 0xCF	; 207
+ 28c:	80 93 c4 00 	sts	0x00C4, r24
+
+	UCSR0C |= 0x06;
+ 290:	e2 ec       	ldi	r30, 0xC2	; 194
+ 292:	f0 e0       	ldi	r31, 0x00	; 0
+ 294:	80 81       	ld	r24, Z
+ 296:	86 60       	ori	r24, 0x06	; 6
+ 298:	80 83       	st	Z, r24
+	
+	UCSR0B |= _BV(RXEN0);
+ 29a:	e1 ec       	ldi	r30, 0xC1	; 193
+ 29c:	f0 e0       	ldi	r31, 0x00	; 0
+ 29e:	80 81       	ld	r24, Z
+ 2a0:	80 61       	ori	r24, 0x10	; 16
+ 2a2:	80 83       	st	Z, r24
+	UCSR0B |= _BV(TXEN0);
+ 2a4:	80 81       	ld	r24, Z
+ 2a6:	88 60       	ori	r24, 0x08	; 8
+ 2a8:	80 83       	st	Z, r24
+ 2aa:	08 95       	ret
+
+000002ac <UART_transmit>:
+	return UDR0;
+}
+
+void UART_transmit(unsigned char data)
+{
+	while( !(UCSR0A & (1<<UDRE0)) );
+ 2ac:	e0 ec       	ldi	r30, 0xC0	; 192
+ 2ae:	f0 e0       	ldi	r31, 0x00	; 0
+ 2b0:	90 81       	ld	r25, Z
+ 2b2:	95 ff       	sbrs	r25, 5
+ 2b4:	fd cf       	rjmp	.-6      	; 0x2b0 <UART_transmit+0x4>
+	UDR0 = data;
+ 2b6:	80 93 c6 00 	sts	0x00C6, r24
+ 2ba:	08 95       	ret
+
+000002bc <UART_printString>:
+}
+
+void UART_printString(char *str)
+{
+ 2bc:	cf 93       	push	r28
+ 2be:	df 93       	push	r29
+ 2c0:	ec 01       	movw	r28, r24
+	for(int i = 0; str[i]; i++)
+ 2c2:	88 81       	ld	r24, Y
+ 2c4:	88 23       	and	r24, r24
+ 2c6:	31 f0       	breq	.+12     	; 0x2d4 <UART_printString+0x18>
+ 2c8:	21 96       	adiw	r28, 0x01	; 1
+	UART_transmit(str[i]);
+ 2ca:	0e 94 56 01 	call	0x2ac	; 0x2ac <UART_transmit>
+	UDR0 = data;
+}
+
+void UART_printString(char *str)
+{
+	for(int i = 0; str[i]; i++)
+ 2ce:	89 91       	ld	r24, Y+
+ 2d0:	81 11       	cpse	r24, r1
+ 2d2:	fb cf       	rjmp	.-10     	; 0x2ca <UART_printString+0xe>
+	UART_transmit(str[i]);
+}
+ 2d4:	df 91       	pop	r29
+ 2d6:	cf 91       	pop	r28
+ 2d8:	08 95       	ret
+
+000002da <UART_print8bitNumber>:
+
+void UART_print8bitNumber(uint8_t no)
+{
+ 2da:	0f 93       	push	r16
+ 2dc:	1f 93       	push	r17
+ 2de:	cf 93       	push	r28
+ 2e0:	df 93       	push	r29
+ 2e2:	00 d0       	rcall	.+0      	; 0x2e4 <UART_print8bitNumber+0xa>
+ 2e4:	00 d0       	rcall	.+0      	; 0x2e6 <UART_print8bitNumber+0xc>
+ 2e6:	cd b7       	in	r28, 0x3d	; 61
+ 2e8:	de b7       	in	r29, 0x3e	; 62
+	char numString[4] = "0";
+ 2ea:	40 e3       	ldi	r20, 0x30	; 48
+ 2ec:	50 e0       	ldi	r21, 0x00	; 0
+ 2ee:	60 e0       	ldi	r22, 0x00	; 0
+ 2f0:	70 e0       	ldi	r23, 0x00	; 0
+ 2f2:	49 83       	std	Y+1, r20	; 0x01
+ 2f4:	5a 83       	std	Y+2, r21	; 0x02
+ 2f6:	6b 83       	std	Y+3, r22	; 0x03
+ 2f8:	7c 83       	std	Y+4, r23	; 0x04
+	int i, index = 0;
+	
+	if(no > 0){
+ 2fa:	81 11       	cpse	r24, r1
+ 2fc:	03 c0       	rjmp	.+6      	; 0x304 <UART_print8bitNumber+0x2a>
+}
+
+void UART_print8bitNumber(uint8_t no)
+{
+	char numString[4] = "0";
+	int i, index = 0;
+ 2fe:	00 e0       	ldi	r16, 0x00	; 0
+ 300:	10 e0       	ldi	r17, 0x00	; 0
+ 302:	22 c0       	rjmp	.+68     	; 0x348 <UART_print8bitNumber+0x6e>
+ 304:	fe 01       	movw	r30, r28
+ 306:	31 96       	adiw	r30, 0x01	; 1
+	
+	if(no > 0){
+ 308:	00 e0       	ldi	r16, 0x00	; 0
+ 30a:	10 e0       	ldi	r17, 0x00	; 0
+		for(i = 0; no != 0 ; i++)
+		{
+			numString[i] = no % 10 + '0';
+ 30c:	4d ec       	ldi	r20, 0xCD	; 205
+ 30e:	84 9f       	mul	r24, r20
+ 310:	91 2d       	mov	r25, r1
+ 312:	11 24       	eor	r1, r1
+ 314:	96 95       	lsr	r25
+ 316:	96 95       	lsr	r25
+ 318:	96 95       	lsr	r25
+ 31a:	29 2f       	mov	r18, r25
+ 31c:	22 0f       	add	r18, r18
+ 31e:	32 2f       	mov	r19, r18
+ 320:	33 0f       	add	r19, r19
+ 322:	33 0f       	add	r19, r19
+ 324:	23 0f       	add	r18, r19
+ 326:	82 1b       	sub	r24, r18
+ 328:	80 5d       	subi	r24, 0xD0	; 208
+ 32a:	81 93       	st	Z+, r24
+			no = no / 10;
+ 32c:	89 2f       	mov	r24, r25
+{
+	char numString[4] = "0";
+	int i, index = 0;
+	
+	if(no > 0){
+		for(i = 0; no != 0 ; i++)
+ 32e:	98 01       	movw	r18, r16
+ 330:	2f 5f       	subi	r18, 0xFF	; 255
+ 332:	3f 4f       	sbci	r19, 0xFF	; 255
+ 334:	99 23       	and	r25, r25
+ 336:	11 f0       	breq	.+4      	; 0x33c <UART_print8bitNumber+0x62>
+ 338:	89 01       	movw	r16, r18
+ 33a:	e9 cf       	rjmp	.-46     	; 0x30e <UART_print8bitNumber+0x34>
+		{
+			numString[i] = no % 10 + '0';
+			no = no / 10;
+		}
+		numString[i] = '\0';
+ 33c:	fe 01       	movw	r30, r28
+ 33e:	e2 0f       	add	r30, r18
+ 340:	f3 1f       	adc	r31, r19
+ 342:	11 82       	std	Z+1, r1	; 0x01
+		index = i - 1;
+	}
+	
+	for(i = index; i >= 0; i--)
+ 344:	11 23       	and	r17, r17
+ 346:	6c f0       	brlt	.+26     	; 0x362 <UART_print8bitNumber+0x88>
+ 348:	e1 e0       	ldi	r30, 0x01	; 1
+ 34a:	f0 e0       	ldi	r31, 0x00	; 0
+ 34c:	ec 0f       	add	r30, r28
+ 34e:	fd 1f       	adc	r31, r29
+ 350:	e0 0f       	add	r30, r16
+ 352:	f1 1f       	adc	r31, r17
+	UART_transmit(numString[i]);
+ 354:	80 81       	ld	r24, Z
+ 356:	0e 94 56 01 	call	0x2ac	; 0x2ac <UART_transmit>
+		}
+		numString[i] = '\0';
+		index = i - 1;
+	}
+	
+	for(i = index; i >= 0; i--)
+ 35a:	01 50       	subi	r16, 0x01	; 1
+ 35c:	11 09       	sbc	r17, r1
+ 35e:	11 23       	and	r17, r17
+ 360:	9c f7       	brge	.-26     	; 0x348 <UART_print8bitNumber+0x6e>
+	UART_transmit(numString[i]);
+}
+ 362:	0f 90       	pop	r0
+ 364:	0f 90       	pop	r0
+ 366:	0f 90       	pop	r0
+ 368:	0f 90       	pop	r0
+ 36a:	df 91       	pop	r29
+ 36c:	cf 91       	pop	r28
+ 36e:	1f 91       	pop	r17
+ 370:	0f 91       	pop	r16
+ 372:	08 95       	ret
+
+00000374 <_exit>:
+ 374:	f8 94       	cli
+
+00000376 <__stop_program>:
+ 376:	ff cf       	rjmp	.-2      	; 0x376 <__stop_program>

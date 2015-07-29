@@ -1,0 +1,576 @@
+
+CH_22_code_1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000001c  00800100  00000350  000003c4  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000350  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  000003e0  2**0
+                  CONTENTS, READONLY
+  3 .debug_aranges 00000078  00000000  00000000  00000410  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   0000053a  00000000  00000000  00000488  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 000002c3  00000000  00000000  000009c2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   00000327  00000000  00000000  00000c85  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000144  00000000  00000000  00000fac  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    0000024e  00000000  00000000  000010f0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    00000546  00000000  00000000  0000133e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000058  00000000  00000000  00001884  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   8:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  10:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  14:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  18:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  1c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  20:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  24:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  28:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  2c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  30:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  34:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  38:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  3c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  40:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  44:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  48:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  4c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  50:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  54:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  58:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  5c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  60:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  64:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e0 e5       	ldi	r30, 0x50	; 80
+  7c:	f3 e0       	ldi	r31, 0x03	; 3
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	ac 31       	cpi	r26, 0x1C	; 28
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+  8a:	0e 94 5b 00 	call	0xb6	; 0xb6 <main>
+  8e:	0c 94 a6 01 	jmp	0x34c	; 0x34c <_exit>
+
+00000092 <__bad_interrupt>:
+  92:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000096 <InitKeyMatrix>:
+uint8_t colPins[COLS] = {PD5, PD4, PD3, PD2};	// 열 연결 핀
+
+void InitKeyMatrix(void)
+{
+	// 행(ROW) 연결 핀 설정 : 풀업 저항을 사용하는 입력
+	DDRB &= ( ~(1 << PB1) & ~(1 << PB0) );		// 입력으로 설정
+  96:	84 b1       	in	r24, 0x04	; 4
+  98:	8c 7f       	andi	r24, 0xFC	; 252
+  9a:	84 b9       	out	0x04, r24	; 4
+	PORTB |= ( (1 << PB1) | (1 << PB0) );		// 풀업 사용
+  9c:	85 b1       	in	r24, 0x05	; 5
+  9e:	83 60       	ori	r24, 0x03	; 3
+  a0:	85 b9       	out	0x05, r24	; 5
+	DDRD &= ( ~(1 << PD7) & ~(1 << PD6) );
+  a2:	8a b1       	in	r24, 0x0a	; 10
+  a4:	8f 73       	andi	r24, 0x3F	; 63
+  a6:	8a b9       	out	0x0a, r24	; 10
+	PORTD |= ( (1 << PD7) | (1 << PD6) );
+  a8:	8b b1       	in	r24, 0x0b	; 11
+  aa:	80 6c       	ori	r24, 0xC0	; 192
+  ac:	8b b9       	out	0x0b, r24	; 11
+	
+	// 열(COL) 연결 핀 설정
+	// 하이 임피던스 상태로 만들기 위해 입력으로 설정
+	DDRD &= 0b11000011;
+  ae:	8a b1       	in	r24, 0x0a	; 10
+  b0:	83 7c       	andi	r24, 0xC3	; 195
+  b2:	8a b9       	out	0x0a, r24	; 10
+  b4:	08 95       	ret
+
+000000b6 <main>:
+}
+
+int main(void)
+{
+  b6:	cf 93       	push	r28
+  b8:	df 93       	push	r29
+  ba:	cd b7       	in	r28, 0x3d	; 61
+  bc:	de b7       	in	r29, 0x3e	; 62
+  be:	60 97       	sbiw	r28, 0x10	; 16
+  c0:	0f b6       	in	r0, 0x3f	; 63
+  c2:	f8 94       	cli
+  c4:	de bf       	out	0x3e, r29	; 62
+  c6:	0f be       	out	0x3f, r0	; 63
+  c8:	cd bf       	out	0x3d, r28	; 61
+	uint8_t keyPressed[ROWS][COLS];	// 키 상태 저장
+	uint8_t row, col, count;
+	
+	UART_INIT();				// UART 통신 초기화
+  ca:	0e 94 77 01 	call	0x2ee	; 0x2ee <UART_INIT>
+	InitKeyMatrix();				// 키 매트릭스 연결 초기화
+  ce:	0e 94 4b 00 	call	0x96	; 0x96 <InitKeyMatrix>
+	
+	while(1)
+	{
+		count = 0;				// 눌려진 버튼의 개수
+  d2:	f1 2c       	mov	r15, r1
+		
+		for(col = 0; col < COLS; col++){
+  d4:	10 e0       	ldi	r17, 0x00	; 0
+  d6:	0f 2e       	mov	r0, r31
+  d8:	f8 e0       	ldi	r31, 0x08	; 8
+  da:	2f 2e       	mov	r2, r31
+  dc:	f1 e0       	ldi	r31, 0x01	; 1
+  de:	3f 2e       	mov	r3, r31
+  e0:	f0 2d       	mov	r31, r0
+  e2:	0f 2e       	mov	r0, r31
+  e4:	f8 e1       	ldi	r31, 0x18	; 24
+  e6:	4f 2e       	mov	r4, r31
+  e8:	f1 e0       	ldi	r31, 0x01	; 1
+  ea:	5f 2e       	mov	r5, r31
+  ec:	f0 2d       	mov	r31, r0
+  ee:	61 2c       	mov	r6, r1
+  f0:	71 2c       	mov	r7, r1
+			DDRD |= (1 << colPins[col]);	// 해당 COL을 출력으로 설정
+  f2:	aa 24       	eor	r10, r10
+  f4:	a3 94       	inc	r10
+  f6:	b1 2c       	mov	r11, r1
+  f8:	b9 c0       	rjmp	.+370    	; 0x26c <main+0x1b6>
+  fa:	4a b1       	in	r20, 0x0a	; 10
+  fc:	81 2f       	mov	r24, r17
+  fe:	90 e0       	ldi	r25, 0x00	; 0
+ 100:	fc 01       	movw	r30, r24
+ 102:	e0 50       	subi	r30, 0x00	; 0
+ 104:	ff 4f       	sbci	r31, 0xFF	; 255
+ 106:	95 01       	movw	r18, r10
+ 108:	00 80       	ld	r0, Z
+ 10a:	02 c0       	rjmp	.+4      	; 0x110 <main+0x5a>
+ 10c:	22 0f       	add	r18, r18
+ 10e:	33 1f       	adc	r19, r19
+ 110:	0a 94       	dec	r0
+ 112:	e2 f7       	brpl	.-8      	; 0x10c <main+0x56>
+ 114:	24 2b       	or	r18, r20
+ 116:	2a b9       	out	0x0a, r18	; 10
+			PORTD &= ~(1 << colPins[col]);	// 해당 COL에 LOW 출력
+ 118:	4b b1       	in	r20, 0x0b	; 11
+ 11a:	95 01       	movw	r18, r10
+ 11c:	00 80       	ld	r0, Z
+ 11e:	02 c0       	rjmp	.+4      	; 0x124 <main+0x6e>
+ 120:	22 0f       	add	r18, r18
+ 122:	33 1f       	adc	r19, r19
+ 124:	0a 94       	dec	r0
+ 126:	e2 f7       	brpl	.-8      	; 0x120 <main+0x6a>
+ 128:	20 95       	com	r18
+ 12a:	24 23       	and	r18, r20
+ 12c:	2b b9       	out	0x0b, r18	; 11
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 12e:	af ed       	ldi	r26, 0xDF	; 223
+ 130:	be e2       	ldi	r27, 0x2E	; 46
+ 132:	11 97       	sbiw	r26, 0x01	; 1
+ 134:	f1 f7       	brne	.-4      	; 0x132 <main+0x7c>
+ 136:	00 c0       	rjmp	.+0      	; 0x138 <main+0x82>
+ 138:	00 00       	nop
+			_delay_ms(3);			// 출력 안정화
+			
+			// LOW의 입력 읽기 : LOW인 경우 버튼이 눌러진 상태
+			keyPressed[0][col] = 1 - ((PINB & (1 << rowPins[0])) >> rowPins[0]);
+ 13a:	63 b1       	in	r22, 0x03	; 3
+ 13c:	a4 e0       	ldi	r26, 0x04	; 4
+ 13e:	b1 e0       	ldi	r27, 0x01	; 1
+ 140:	ec 91       	ld	r30, X
+ 142:	21 e0       	ldi	r18, 0x01	; 1
+ 144:	30 e0       	ldi	r19, 0x00	; 0
+ 146:	2c 0f       	add	r18, r28
+ 148:	3d 1f       	adc	r19, r29
+ 14a:	28 0f       	add	r18, r24
+ 14c:	39 1f       	adc	r19, r25
+ 14e:	a5 01       	movw	r20, r10
+ 150:	0e 2e       	mov	r0, r30
+ 152:	02 c0       	rjmp	.+4      	; 0x158 <main+0xa2>
+ 154:	44 0f       	add	r20, r20
+ 156:	55 1f       	adc	r21, r21
+ 158:	0a 94       	dec	r0
+ 15a:	e2 f7       	brpl	.-8      	; 0x154 <main+0x9e>
+ 15c:	70 e0       	ldi	r23, 0x00	; 0
+ 15e:	46 23       	and	r20, r22
+ 160:	57 23       	and	r21, r23
+ 162:	02 c0       	rjmp	.+4      	; 0x168 <main+0xb2>
+ 164:	55 95       	asr	r21
+ 166:	47 95       	ror	r20
+ 168:	ea 95       	dec	r30
+ 16a:	e2 f7       	brpl	.-8      	; 0x164 <main+0xae>
+ 16c:	01 e0       	ldi	r16, 0x01	; 1
+ 16e:	b0 2f       	mov	r27, r16
+ 170:	b4 1b       	sub	r27, r20
+ 172:	f9 01       	movw	r30, r18
+ 174:	b0 83       	st	Z, r27
+			keyPressed[1][col] = 1 - ((PINB & (1 << rowPins[1])) >> rowPins[1]);
+ 176:	63 b1       	in	r22, 0x03	; 3
+ 178:	a5 e0       	ldi	r26, 0x05	; 5
+ 17a:	b1 e0       	ldi	r27, 0x01	; 1
+ 17c:	ec 91       	ld	r30, X
+ 17e:	a5 e0       	ldi	r26, 0x05	; 5
+ 180:	b0 e0       	ldi	r27, 0x00	; 0
+ 182:	ac 0f       	add	r26, r28
+ 184:	bd 1f       	adc	r27, r29
+ 186:	a8 0f       	add	r26, r24
+ 188:	b9 1f       	adc	r27, r25
+ 18a:	a5 01       	movw	r20, r10
+ 18c:	0e 2e       	mov	r0, r30
+ 18e:	02 c0       	rjmp	.+4      	; 0x194 <main+0xde>
+ 190:	44 0f       	add	r20, r20
+ 192:	55 1f       	adc	r21, r21
+ 194:	0a 94       	dec	r0
+ 196:	e2 f7       	brpl	.-8      	; 0x190 <main+0xda>
+ 198:	70 e0       	ldi	r23, 0x00	; 0
+ 19a:	46 23       	and	r20, r22
+ 19c:	57 23       	and	r21, r23
+ 19e:	02 c0       	rjmp	.+4      	; 0x1a4 <main+0xee>
+ 1a0:	55 95       	asr	r21
+ 1a2:	47 95       	ror	r20
+ 1a4:	ea 95       	dec	r30
+ 1a6:	e2 f7       	brpl	.-8      	; 0x1a0 <main+0xea>
+ 1a8:	e0 2f       	mov	r30, r16
+ 1aa:	e4 1b       	sub	r30, r20
+ 1ac:	ec 93       	st	X, r30
+			keyPressed[2][col] = 1 - ((PIND & (1 << rowPins[2])) >> rowPins[2]);
+ 1ae:	69 b1       	in	r22, 0x09	; 9
+ 1b0:	e6 e0       	ldi	r30, 0x06	; 6
+ 1b2:	f1 e0       	ldi	r31, 0x01	; 1
+ 1b4:	e0 80       	ld	r14, Z
+ 1b6:	0f 2e       	mov	r0, r31
+ 1b8:	f9 e0       	ldi	r31, 0x09	; 9
+ 1ba:	cf 2e       	mov	r12, r31
+ 1bc:	d1 2c       	mov	r13, r1
+ 1be:	f0 2d       	mov	r31, r0
+ 1c0:	cc 0e       	add	r12, r28
+ 1c2:	dd 1e       	adc	r13, r29
+ 1c4:	c8 0e       	add	r12, r24
+ 1c6:	d9 1e       	adc	r13, r25
+ 1c8:	a5 01       	movw	r20, r10
+ 1ca:	0e 2c       	mov	r0, r14
+ 1cc:	02 c0       	rjmp	.+4      	; 0x1d2 <main+0x11c>
+ 1ce:	44 0f       	add	r20, r20
+ 1d0:	55 1f       	adc	r21, r21
+ 1d2:	0a 94       	dec	r0
+ 1d4:	e2 f7       	brpl	.-8      	; 0x1ce <main+0x118>
+ 1d6:	70 e0       	ldi	r23, 0x00	; 0
+ 1d8:	46 23       	and	r20, r22
+ 1da:	57 23       	and	r21, r23
+ 1dc:	02 c0       	rjmp	.+4      	; 0x1e2 <main+0x12c>
+ 1de:	55 95       	asr	r21
+ 1e0:	47 95       	ror	r20
+ 1e2:	ea 94       	dec	r14
+ 1e4:	e2 f7       	brpl	.-8      	; 0x1de <main+0x128>
+ 1e6:	f0 2f       	mov	r31, r16
+ 1e8:	f4 1b       	sub	r31, r20
+ 1ea:	4f 2f       	mov	r20, r31
+ 1ec:	f6 01       	movw	r30, r12
+ 1ee:	40 83       	st	Z, r20
+			keyPressed[3][col] = 1 - ((PIND & (1 << rowPins[3])) >> rowPins[3]);
+ 1f0:	69 b1       	in	r22, 0x09	; 9
+ 1f2:	e7 e0       	ldi	r30, 0x07	; 7
+ 1f4:	f1 e0       	ldi	r31, 0x01	; 1
+ 1f6:	e0 80       	ld	r14, Z
+ 1f8:	a5 01       	movw	r20, r10
+ 1fa:	0e 2c       	mov	r0, r14
+ 1fc:	02 c0       	rjmp	.+4      	; 0x202 <main+0x14c>
+ 1fe:	44 0f       	add	r20, r20
+ 200:	55 1f       	adc	r21, r21
+ 202:	0a 94       	dec	r0
+ 204:	e2 f7       	brpl	.-8      	; 0x1fe <main+0x148>
+ 206:	70 e0       	ldi	r23, 0x00	; 0
+ 208:	46 23       	and	r20, r22
+ 20a:	57 23       	and	r21, r23
+ 20c:	02 c0       	rjmp	.+4      	; 0x212 <main+0x15c>
+ 20e:	55 95       	asr	r21
+ 210:	47 95       	ror	r20
+ 212:	ea 94       	dec	r14
+ 214:	e2 f7       	brpl	.-8      	; 0x20e <main+0x158>
+ 216:	04 1b       	sub	r16, r20
+ 218:	4d e0       	ldi	r20, 0x0D	; 13
+ 21a:	50 e0       	ldi	r21, 0x00	; 0
+ 21c:	4c 0f       	add	r20, r28
+ 21e:	5d 1f       	adc	r21, r29
+ 220:	48 0f       	add	r20, r24
+ 222:	59 1f       	adc	r21, r25
+ 224:	fa 01       	movw	r30, r20
+ 226:	00 83       	st	Z, r16
+			
+			for(row = 0; row < ROWS; row++)	// 눌러진 버튼 개수 읽기
+			count += keyPressed[row][col];
+ 228:	f9 01       	movw	r30, r18
+ 22a:	20 81       	ld	r18, Z
+ 22c:	02 0f       	add	r16, r18
+ 22e:	f0 0e       	add	r15, r16
+ 230:	2c 91       	ld	r18, X
+ 232:	f2 0e       	add	r15, r18
+ 234:	d6 01       	movw	r26, r12
+ 236:	2c 91       	ld	r18, X
+ 238:	f2 0e       	add	r15, r18
+
+			PORTD |= (1 << colPins[col]);	// 해당 COL에 HIGH 출력
+ 23a:	2b b1       	in	r18, 0x0b	; 11
+ 23c:	fc 01       	movw	r30, r24
+ 23e:	e0 50       	subi	r30, 0x00	; 0
+ 240:	ff 4f       	sbci	r31, 0xFF	; 255
+ 242:	c5 01       	movw	r24, r10
+ 244:	00 80       	ld	r0, Z
+ 246:	02 c0       	rjmp	.+4      	; 0x24c <main+0x196>
+ 248:	88 0f       	add	r24, r24
+ 24a:	99 1f       	adc	r25, r25
+ 24c:	0a 94       	dec	r0
+ 24e:	e2 f7       	brpl	.-8      	; 0x248 <main+0x192>
+ 250:	82 2b       	or	r24, r18
+ 252:	8b b9       	out	0x0b, r24	; 11
+			DDRD &= ~(1 << colPins[col]);	// 입력으로 (하이 임피던스 상태) 설정
+ 254:	2a b1       	in	r18, 0x0a	; 10
+ 256:	c5 01       	movw	r24, r10
+ 258:	00 80       	ld	r0, Z
+ 25a:	02 c0       	rjmp	.+4      	; 0x260 <main+0x1aa>
+ 25c:	88 0f       	add	r24, r24
+ 25e:	99 1f       	adc	r25, r25
+ 260:	0a 94       	dec	r0
+ 262:	e2 f7       	brpl	.-8      	; 0x25c <main+0x1a6>
+ 264:	80 95       	com	r24
+ 266:	82 23       	and	r24, r18
+ 268:	8a b9       	out	0x0a, r24	; 10
+	
+	while(1)
+	{
+		count = 0;				// 눌려진 버튼의 개수
+		
+		for(col = 0; col < COLS; col++){
+ 26a:	1f 5f       	subi	r17, 0xFF	; 255
+ 26c:	14 30       	cpi	r17, 0x04	; 4
+ 26e:	08 f4       	brcc	.+2      	; 0x272 <main+0x1bc>
+ 270:	44 cf       	rjmp	.-376    	; 0xfa <main+0x44>
+
+			PORTD |= (1 << colPins[col]);	// 해당 COL에 HIGH 출력
+			DDRD &= ~(1 << colPins[col]);	// 입력으로 (하이 임피던스 상태) 설정
+		}
+
+		if(count > 0){			// 버튼이 눌러진 경우만 UART로 출력
+ 272:	ff 20       	and	r15, r15
+ 274:	81 f1       	breq	.+96     	; 0x2d6 <main+0x220>
+ 276:	71 01       	movw	r14, r2
+ 278:	fe 01       	movw	r30, r28
+ 27a:	31 96       	adiw	r30, 0x01	; 1
+ 27c:	4f 01       	movw	r8, r30
+ 27e:	24 c0       	rjmp	.+72     	; 0x2c8 <main+0x212>
+			for(row = 0; row < ROWS; row++){
+				for(col = 0; col < COLS; col++){
+					if(keyPressed[row][col])
+ 280:	d6 01       	movw	r26, r12
+ 282:	8d 91       	ld	r24, X+
+ 284:	6d 01       	movw	r12, r26
+ 286:	88 23       	and	r24, r24
+ 288:	39 f0       	breq	.+14     	; 0x298 <main+0x1e2>
+ 28a:	f7 01       	movw	r30, r14
+ 28c:	e0 0f       	add	r30, r16
+ 28e:	f1 1f       	adc	r31, r17
+					UART_transmit(keys[row][col]);
+ 290:	80 81       	ld	r24, Z
+ 292:	0e 94 8f 01 	call	0x31e	; 0x31e <UART_transmit>
+ 296:	03 c0       	rjmp	.+6      	; 0x29e <main+0x1e8>
+					else
+					UART_transmit('.');
+ 298:	8e e2       	ldi	r24, 0x2E	; 46
+ 29a:	0e 94 8f 01 	call	0x31e	; 0x31e <UART_transmit>
+					UART_printString("  ");
+ 29e:	88 e1       	ldi	r24, 0x18	; 24
+ 2a0:	91 e0       	ldi	r25, 0x01	; 1
+ 2a2:	0e 94 97 01 	call	0x32e	; 0x32e <UART_printString>
+ 2a6:	0f 5f       	subi	r16, 0xFF	; 255
+ 2a8:	1f 4f       	sbci	r17, 0xFF	; 255
+			DDRD &= ~(1 << colPins[col]);	// 입력으로 (하이 임피던스 상태) 설정
+		}
+
+		if(count > 0){			// 버튼이 눌러진 경우만 UART로 출력
+			for(row = 0; row < ROWS; row++){
+				for(col = 0; col < COLS; col++){
+ 2aa:	04 30       	cpi	r16, 0x04	; 4
+ 2ac:	11 05       	cpc	r17, r1
+ 2ae:	41 f7       	brne	.-48     	; 0x280 <main+0x1ca>
+					UART_transmit(keys[row][col]);
+					else
+					UART_transmit('.');
+					UART_printString("  ");
+				}
+				UART_transmit('\n');
+ 2b0:	8a e0       	ldi	r24, 0x0A	; 10
+ 2b2:	0e 94 8f 01 	call	0x31e	; 0x31e <UART_transmit>
+ 2b6:	b4 e0       	ldi	r27, 0x04	; 4
+ 2b8:	eb 0e       	add	r14, r27
+ 2ba:	f1 1c       	adc	r15, r1
+ 2bc:	e4 e0       	ldi	r30, 0x04	; 4
+ 2be:	8e 0e       	add	r8, r30
+ 2c0:	91 1c       	adc	r9, r1
+			PORTD |= (1 << colPins[col]);	// 해당 COL에 HIGH 출력
+			DDRD &= ~(1 << colPins[col]);	// 입력으로 (하이 임피던스 상태) 설정
+		}
+
+		if(count > 0){			// 버튼이 눌러진 경우만 UART로 출력
+			for(row = 0; row < ROWS; row++){
+ 2c2:	e4 14       	cp	r14, r4
+ 2c4:	f5 04       	cpc	r15, r5
+ 2c6:	21 f0       	breq	.+8      	; 0x2d0 <main+0x21a>
+	
+	while(1)
+	{
+		count = 0;				// 눌려진 버튼의 개수
+		
+		for(col = 0; col < COLS; col++){
+ 2c8:	64 01       	movw	r12, r8
+ 2ca:	06 2d       	mov	r16, r6
+ 2cc:	17 2d       	mov	r17, r7
+ 2ce:	d8 cf       	rjmp	.-80     	; 0x280 <main+0x1ca>
+					UART_transmit('.');
+					UART_printString("  ");
+				}
+				UART_transmit('\n');
+			}
+			UART_transmit('\n');
+ 2d0:	8a e0       	ldi	r24, 0x0A	; 10
+ 2d2:	0e 94 8f 01 	call	0x31e	; 0x31e <UART_transmit>
+ 2d6:	ff ef       	ldi	r31, 0xFF	; 255
+ 2d8:	23 ed       	ldi	r18, 0xD3	; 211
+ 2da:	60 e3       	ldi	r22, 0x30	; 48
+ 2dc:	f1 50       	subi	r31, 0x01	; 1
+ 2de:	20 40       	sbci	r18, 0x00	; 0
+ 2e0:	60 40       	sbci	r22, 0x00	; 0
+ 2e2:	e1 f7       	brne	.-8      	; 0x2dc <main+0x226>
+ 2e4:	00 c0       	rjmp	.+0      	; 0x2e6 <main+0x230>
+ 2e6:	00 00       	nop
+	UART_INIT();				// UART 통신 초기화
+	InitKeyMatrix();				// 키 매트릭스 연결 초기화
+	
+	while(1)
+	{
+		count = 0;				// 눌려진 버튼의 개수
+ 2e8:	f1 2c       	mov	r15, r1
+		
+		for(col = 0; col < COLS; col++){
+ 2ea:	10 e0       	ldi	r17, 0x00	; 0
+ 2ec:	bf cf       	rjmp	.-130    	; 0x26c <main+0x1b6>
+
+000002ee <UART_INIT>:
+ */ 
+
+#include "UART.h"
+
+void UART_INIT(void) {
+	UCSR0A |= _BV(U2X0);
+ 2ee:	e0 ec       	ldi	r30, 0xC0	; 192
+ 2f0:	f0 e0       	ldi	r31, 0x00	; 0
+ 2f2:	80 81       	ld	r24, Z
+ 2f4:	82 60       	ori	r24, 0x02	; 2
+ 2f6:	80 83       	st	Z, r24
+
+	UBRR0H = 0x00;
+ 2f8:	10 92 c5 00 	sts	0x00C5, r1
+	UBRR0L = 207;
+ 2fc:	8f ec       	ldi	r24, 0xCF	; 207
+ 2fe:	80 93 c4 00 	sts	0x00C4, r24
+
+	UCSR0C |= 0x06;
+ 302:	e2 ec       	ldi	r30, 0xC2	; 194
+ 304:	f0 e0       	ldi	r31, 0x00	; 0
+ 306:	80 81       	ld	r24, Z
+ 308:	86 60       	ori	r24, 0x06	; 6
+ 30a:	80 83       	st	Z, r24
+	
+	UCSR0B |= _BV(RXEN0);
+ 30c:	e1 ec       	ldi	r30, 0xC1	; 193
+ 30e:	f0 e0       	ldi	r31, 0x00	; 0
+ 310:	80 81       	ld	r24, Z
+ 312:	80 61       	ori	r24, 0x10	; 16
+ 314:	80 83       	st	Z, r24
+	UCSR0B |= _BV(TXEN0);
+ 316:	80 81       	ld	r24, Z
+ 318:	88 60       	ori	r24, 0x08	; 8
+ 31a:	80 83       	st	Z, r24
+ 31c:	08 95       	ret
+
+0000031e <UART_transmit>:
+	return UDR0;
+}
+
+void UART_transmit(unsigned char data)
+{
+	while( !(UCSR0A & (1<<UDRE0)) );
+ 31e:	e0 ec       	ldi	r30, 0xC0	; 192
+ 320:	f0 e0       	ldi	r31, 0x00	; 0
+ 322:	90 81       	ld	r25, Z
+ 324:	95 ff       	sbrs	r25, 5
+ 326:	fd cf       	rjmp	.-6      	; 0x322 <UART_transmit+0x4>
+	UDR0 = data;
+ 328:	80 93 c6 00 	sts	0x00C6, r24
+ 32c:	08 95       	ret
+
+0000032e <UART_printString>:
+}
+
+void UART_printString(char *str)
+{
+ 32e:	cf 93       	push	r28
+ 330:	df 93       	push	r29
+ 332:	ec 01       	movw	r28, r24
+	for(int i = 0; str[i]; i++)
+ 334:	88 81       	ld	r24, Y
+ 336:	88 23       	and	r24, r24
+ 338:	31 f0       	breq	.+12     	; 0x346 <UART_printString+0x18>
+ 33a:	21 96       	adiw	r28, 0x01	; 1
+	UART_transmit(str[i]);
+ 33c:	0e 94 8f 01 	call	0x31e	; 0x31e <UART_transmit>
+	UDR0 = data;
+}
+
+void UART_printString(char *str)
+{
+	for(int i = 0; str[i]; i++)
+ 340:	89 91       	ld	r24, Y+
+ 342:	81 11       	cpse	r24, r1
+ 344:	fb cf       	rjmp	.-10     	; 0x33c <UART_printString+0xe>
+	UART_transmit(str[i]);
+}
+ 346:	df 91       	pop	r29
+ 348:	cf 91       	pop	r28
+ 34a:	08 95       	ret
+
+0000034c <_exit>:
+ 34c:	f8 94       	cli
+
+0000034e <__stop_program>:
+ 34e:	ff cf       	rjmp	.-2      	; 0x34e <__stop_program>

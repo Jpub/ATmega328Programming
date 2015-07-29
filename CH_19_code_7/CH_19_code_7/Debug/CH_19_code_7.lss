@@ -1,0 +1,418 @@
+
+CH_19_code_7.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000000a  00800100  00000220  00000294  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000220  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  0000029e  2**0
+                  CONTENTS, READONLY
+  3 .debug_aranges 00000020  00000000  00000000  000002ce  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   00000260  00000000  00000000  000002ee  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 000000fc  00000000  00000000  0000054e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   0000017b  00000000  00000000  0000064a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000034  00000000  00000000  000007c8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    000001a4  00000000  00000000  000007fc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    000003e2  00000000  00000000  000009a0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000010  00000000  00000000  00000d82  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   8:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  10:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  14:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  18:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  1c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  20:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  24:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  28:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  2c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  30:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  34:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  38:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  3c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  40:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  44:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  48:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  4c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  50:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  54:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  58:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  5c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  60:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  64:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e0 e2       	ldi	r30, 0x20	; 32
+  7c:	f2 e0       	ldi	r31, 0x02	; 2
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	aa 30       	cpi	r26, 0x0A	; 10
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+  8a:	0e 94 4b 00 	call	0x96	; 0x96 <main>
+  8e:	0c 94 0e 01 	jmp	0x21c	; 0x21c <_exit>
+
+00000092 <__bad_interrupt>:
+  92:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000096 <main>:
+#include <avr/io.h>
+#include <util/delay.h>
+#define SEGMENT_DELAY 5 // LED가 완전히 켜지기 위한 시간
+
+int main(void)
+{
+  96:	cf 93       	push	r28
+  98:	df 93       	push	r29
+  9a:	cd b7       	in	r28, 0x3d	; 61
+  9c:	de b7       	in	r29, 0x3e	; 62
+  9e:	2a 97       	sbiw	r28, 0x0a	; 10
+  a0:	0f b6       	in	r0, 0x3f	; 63
+  a2:	f8 94       	cli
+  a4:	de bf       	out	0x3e, r29	; 62
+  a6:	0f be       	out	0x3f, r0	; 63
+  a8:	cd bf       	out	0x3d, r28	; 61
+	uint8_t numbers[]
+  aa:	8a e0       	ldi	r24, 0x0A	; 10
+  ac:	e0 e0       	ldi	r30, 0x00	; 0
+  ae:	f1 e0       	ldi	r31, 0x01	; 1
+  b0:	de 01       	movw	r26, r28
+  b2:	11 96       	adiw	r26, 0x01	; 1
+  b4:	01 90       	ld	r0, Z+
+  b6:	0d 92       	st	X+, r0
+  b8:	8a 95       	dec	r24
+  ba:	e1 f7       	brne	.-8      	; 0xb4 <main+0x1e>
+	= {0xFC, 0x60, 0xDA, 0xF2, 0x66, 0xB6, 0xBE, 0xE4, 0xFE, 0xE6};
+	int count = 1000; // 현재 표시할 숫자(0~9)
+	int thousands, hundreds, tens, ones;
+	DDRD = 0xFF; // 세그먼트 제어 핀 8개를 출력으로 설정
+  bc:	8f ef       	ldi	r24, 0xFF	; 255
+  be:	8a b9       	out	0x0a, r24	; 10
+	DDRB = 0x0F; // 자릿수 선택 핀 4개를 출력으로 설정
+  c0:	8f e0       	ldi	r24, 0x0F	; 15
+  c2:	84 b9       	out	0x04, r24	; 4
+
+int main(void)
+{
+	uint8_t numbers[]
+	= {0xFC, 0x60, 0xDA, 0xF2, 0x66, 0xB6, 0xBE, 0xE4, 0xFE, 0xE6};
+	int count = 1000; // 현재 표시할 숫자(0~9)
+  c4:	28 ee       	ldi	r18, 0xE8	; 232
+  c6:	33 e0       	ldi	r19, 0x03	; 3
+	{
+		thousands = count / 1000; // 천의 자리
+		hundreds = count / 100 % 10; // 백의 자리
+		tens = count / 10 % 10; // 십의 자리
+		ones = count % 10; // 일의 자리
+		PORTB = 0x0E; // 천의 자리 출력
+  c8:	0f 2e       	mov	r0, r31
+  ca:	fe e0       	ldi	r31, 0x0E	; 14
+  cc:	bf 2e       	mov	r11, r31
+  ce:	f0 2d       	mov	r31, r0
+	int thousands, hundreds, tens, ones;
+	DDRD = 0xFF; // 세그먼트 제어 핀 8개를 출력으로 설정
+	DDRB = 0x0F; // 자릿수 선택 핀 4개를 출력으로 설정
+	while(1)
+	{
+		thousands = count / 1000; // 천의 자리
+  d0:	0f 2e       	mov	r0, r31
+  d2:	f8 ee       	ldi	r31, 0xE8	; 232
+  d4:	ff 2e       	mov	r15, r31
+  d6:	f0 2d       	mov	r31, r0
+  d8:	43 e0       	ldi	r20, 0x03	; 3
+		tens = count / 10 % 10; // 십의 자리
+		ones = count % 10; // 일의 자리
+		PORTB = 0x0E; // 천의 자리 출력
+		PORTD = numbers[thousands];
+		_delay_ms(SEGMENT_DELAY);
+		PORTB = 0x0D; // 백의 자리 출력
+  da:	0f 2e       	mov	r0, r31
+  dc:	fd e0       	ldi	r31, 0x0D	; 13
+  de:	cf 2e       	mov	r12, r31
+  e0:	f0 2d       	mov	r31, r0
+	DDRD = 0xFF; // 세그먼트 제어 핀 8개를 출력으로 설정
+	DDRB = 0x0F; // 자릿수 선택 핀 4개를 출력으로 설정
+	while(1)
+	{
+		thousands = count / 1000; // 천의 자리
+		hundreds = count / 100 % 10; // 백의 자리
+  e2:	04 e6       	ldi	r16, 0x64	; 100
+  e4:	10 e0       	ldi	r17, 0x00	; 0
+  e6:	ea e0       	ldi	r30, 0x0A	; 10
+  e8:	f0 e0       	ldi	r31, 0x00	; 0
+		PORTD = numbers[thousands];
+		_delay_ms(SEGMENT_DELAY);
+		PORTB = 0x0D; // 백의 자리 출력
+		PORTD = numbers[hundreds];
+		_delay_ms(SEGMENT_DELAY);
+		PORTB = 0x0B; // 십의 자리 출력
+  ea:	0f 2e       	mov	r0, r31
+  ec:	fb e0       	ldi	r31, 0x0B	; 11
+  ee:	df 2e       	mov	r13, r31
+  f0:	f0 2d       	mov	r31, r0
+		PORTD = numbers[tens];
+		_delay_ms(SEGMENT_DELAY);
+		PORTB = 0x07; // 일의 자리 출력
+  f2:	0f 2e       	mov	r0, r31
+  f4:	f7 e0       	ldi	r31, 0x07	; 7
+  f6:	ef 2e       	mov	r14, r31
+  f8:	f0 2d       	mov	r31, r0
+  fa:	02 c0       	rjmp	.+4      	; 0x100 <main+0x6a>
+		PORTD = numbers[ones];
+		_delay_ms(SEGMENT_DELAY);
+		_delay_ms(100); // 0.1초 대기
+		count++;
+		if(count == 10000) count = 1000; // 1000~9999까지 반복
+  fc:	2f 2d       	mov	r18, r15
+  fe:	34 2f       	mov	r19, r20
+	{
+		thousands = count / 1000; // 천의 자리
+		hundreds = count / 100 % 10; // 백의 자리
+		tens = count / 10 % 10; // 십의 자리
+		ones = count % 10; // 일의 자리
+		PORTB = 0x0E; // 천의 자리 출력
+ 100:	b5 b8       	out	0x05, r11	; 5
+	int thousands, hundreds, tens, ones;
+	DDRD = 0xFF; // 세그먼트 제어 핀 8개를 출력으로 설정
+	DDRB = 0x0F; // 자릿수 선택 핀 4개를 출력으로 설정
+	while(1)
+	{
+		thousands = count / 1000; // 천의 자리
+ 102:	c9 01       	movw	r24, r18
+ 104:	6f 2d       	mov	r22, r15
+ 106:	74 2f       	mov	r23, r20
+ 108:	0e 94 e6 00 	call	0x1cc	; 0x1cc <__divmodhi4>
+		hundreds = count / 100 % 10; // 백의 자리
+		tens = count / 10 % 10; // 십의 자리
+		ones = count % 10; // 일의 자리
+		PORTB = 0x0E; // 천의 자리 출력
+		PORTD = numbers[thousands];
+ 10c:	a1 e0       	ldi	r26, 0x01	; 1
+ 10e:	b0 e0       	ldi	r27, 0x00	; 0
+ 110:	ac 0f       	add	r26, r28
+ 112:	bd 1f       	adc	r27, r29
+ 114:	a6 0f       	add	r26, r22
+ 116:	b7 1f       	adc	r27, r23
+ 118:	8c 91       	ld	r24, X
+ 11a:	8b b9       	out	0x0b, r24	; 11
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 11c:	8f e1       	ldi	r24, 0x1F	; 31
+ 11e:	9e e4       	ldi	r25, 0x4E	; 78
+ 120:	01 97       	sbiw	r24, 0x01	; 1
+ 122:	f1 f7       	brne	.-4      	; 0x120 <main+0x8a>
+ 124:	00 c0       	rjmp	.+0      	; 0x126 <main+0x90>
+ 126:	00 00       	nop
+		_delay_ms(SEGMENT_DELAY);
+		PORTB = 0x0D; // 백의 자리 출력
+ 128:	c5 b8       	out	0x05, r12	; 5
+	DDRD = 0xFF; // 세그먼트 제어 핀 8개를 출력으로 설정
+	DDRB = 0x0F; // 자릿수 선택 핀 4개를 출력으로 설정
+	while(1)
+	{
+		thousands = count / 1000; // 천의 자리
+		hundreds = count / 100 % 10; // 백의 자리
+ 12a:	c9 01       	movw	r24, r18
+ 12c:	b8 01       	movw	r22, r16
+ 12e:	0e 94 e6 00 	call	0x1cc	; 0x1cc <__divmodhi4>
+ 132:	cb 01       	movw	r24, r22
+ 134:	bf 01       	movw	r22, r30
+ 136:	0e 94 e6 00 	call	0x1cc	; 0x1cc <__divmodhi4>
+		ones = count % 10; // 일의 자리
+		PORTB = 0x0E; // 천의 자리 출력
+		PORTD = numbers[thousands];
+		_delay_ms(SEGMENT_DELAY);
+		PORTB = 0x0D; // 백의 자리 출력
+		PORTD = numbers[hundreds];
+ 13a:	a1 e0       	ldi	r26, 0x01	; 1
+ 13c:	b0 e0       	ldi	r27, 0x00	; 0
+ 13e:	ac 0f       	add	r26, r28
+ 140:	bd 1f       	adc	r27, r29
+ 142:	a8 0f       	add	r26, r24
+ 144:	b9 1f       	adc	r27, r25
+ 146:	8c 91       	ld	r24, X
+ 148:	8b b9       	out	0x0b, r24	; 11
+ 14a:	8f e1       	ldi	r24, 0x1F	; 31
+ 14c:	9e e4       	ldi	r25, 0x4E	; 78
+ 14e:	01 97       	sbiw	r24, 0x01	; 1
+ 150:	f1 f7       	brne	.-4      	; 0x14e <main+0xb8>
+ 152:	00 c0       	rjmp	.+0      	; 0x154 <main+0xbe>
+ 154:	00 00       	nop
+		_delay_ms(SEGMENT_DELAY);
+		PORTB = 0x0B; // 십의 자리 출력
+ 156:	d5 b8       	out	0x05, r13	; 5
+	DDRB = 0x0F; // 자릿수 선택 핀 4개를 출력으로 설정
+	while(1)
+	{
+		thousands = count / 1000; // 천의 자리
+		hundreds = count / 100 % 10; // 백의 자리
+		tens = count / 10 % 10; // 십의 자리
+ 158:	c9 01       	movw	r24, r18
+ 15a:	bf 01       	movw	r22, r30
+ 15c:	0e 94 e6 00 	call	0x1cc	; 0x1cc <__divmodhi4>
+ 160:	cb 01       	movw	r24, r22
+ 162:	bf 01       	movw	r22, r30
+ 164:	0e 94 e6 00 	call	0x1cc	; 0x1cc <__divmodhi4>
+		_delay_ms(SEGMENT_DELAY);
+		PORTB = 0x0D; // 백의 자리 출력
+		PORTD = numbers[hundreds];
+		_delay_ms(SEGMENT_DELAY);
+		PORTB = 0x0B; // 십의 자리 출력
+		PORTD = numbers[tens];
+ 168:	a1 e0       	ldi	r26, 0x01	; 1
+ 16a:	b0 e0       	ldi	r27, 0x00	; 0
+ 16c:	ac 0f       	add	r26, r28
+ 16e:	bd 1f       	adc	r27, r29
+ 170:	a8 0f       	add	r26, r24
+ 172:	b9 1f       	adc	r27, r25
+ 174:	8c 91       	ld	r24, X
+ 176:	8b b9       	out	0x0b, r24	; 11
+ 178:	8f e1       	ldi	r24, 0x1F	; 31
+ 17a:	9e e4       	ldi	r25, 0x4E	; 78
+ 17c:	01 97       	sbiw	r24, 0x01	; 1
+ 17e:	f1 f7       	brne	.-4      	; 0x17c <main+0xe6>
+ 180:	00 c0       	rjmp	.+0      	; 0x182 <main+0xec>
+ 182:	00 00       	nop
+		_delay_ms(SEGMENT_DELAY);
+		PORTB = 0x07; // 일의 자리 출력
+ 184:	e5 b8       	out	0x05, r14	; 5
+	while(1)
+	{
+		thousands = count / 1000; // 천의 자리
+		hundreds = count / 100 % 10; // 백의 자리
+		tens = count / 10 % 10; // 십의 자리
+		ones = count % 10; // 일의 자리
+ 186:	c9 01       	movw	r24, r18
+ 188:	bf 01       	movw	r22, r30
+ 18a:	0e 94 e6 00 	call	0x1cc	; 0x1cc <__divmodhi4>
+		_delay_ms(SEGMENT_DELAY);
+		PORTB = 0x0B; // 십의 자리 출력
+		PORTD = numbers[tens];
+		_delay_ms(SEGMENT_DELAY);
+		PORTB = 0x07; // 일의 자리 출력
+		PORTD = numbers[ones];
+ 18e:	a1 e0       	ldi	r26, 0x01	; 1
+ 190:	b0 e0       	ldi	r27, 0x00	; 0
+ 192:	ac 0f       	add	r26, r28
+ 194:	bd 1f       	adc	r27, r29
+ 196:	a8 0f       	add	r26, r24
+ 198:	b9 1f       	adc	r27, r25
+ 19a:	8c 91       	ld	r24, X
+ 19c:	8b b9       	out	0x0b, r24	; 11
+ 19e:	8f e1       	ldi	r24, 0x1F	; 31
+ 1a0:	9e e4       	ldi	r25, 0x4E	; 78
+ 1a2:	01 97       	sbiw	r24, 0x01	; 1
+ 1a4:	f1 f7       	brne	.-4      	; 0x1a2 <main+0x10c>
+ 1a6:	00 c0       	rjmp	.+0      	; 0x1a8 <main+0x112>
+ 1a8:	00 00       	nop
+ 1aa:	9f ef       	ldi	r25, 0xFF	; 255
+ 1ac:	51 ee       	ldi	r21, 0xE1	; 225
+ 1ae:	84 e0       	ldi	r24, 0x04	; 4
+ 1b0:	91 50       	subi	r25, 0x01	; 1
+ 1b2:	50 40       	sbci	r21, 0x00	; 0
+ 1b4:	80 40       	sbci	r24, 0x00	; 0
+ 1b6:	e1 f7       	brne	.-8      	; 0x1b0 <main+0x11a>
+ 1b8:	00 c0       	rjmp	.+0      	; 0x1ba <main+0x124>
+ 1ba:	00 00       	nop
+		_delay_ms(SEGMENT_DELAY);
+		_delay_ms(100); // 0.1초 대기
+		count++;
+ 1bc:	2f 5f       	subi	r18, 0xFF	; 255
+ 1be:	3f 4f       	sbci	r19, 0xFF	; 255
+		if(count == 10000) count = 1000; // 1000~9999까지 반복
+ 1c0:	20 31       	cpi	r18, 0x10	; 16
+ 1c2:	97 e2       	ldi	r25, 0x27	; 39
+ 1c4:	39 07       	cpc	r19, r25
+ 1c6:	09 f0       	breq	.+2      	; 0x1ca <main+0x134>
+ 1c8:	9b cf       	rjmp	.-202    	; 0x100 <main+0x6a>
+ 1ca:	98 cf       	rjmp	.-208    	; 0xfc <main+0x66>
+
+000001cc <__divmodhi4>:
+ 1cc:	97 fb       	bst	r25, 7
+ 1ce:	07 2e       	mov	r0, r23
+ 1d0:	16 f4       	brtc	.+4      	; 0x1d6 <__divmodhi4+0xa>
+ 1d2:	00 94       	com	r0
+ 1d4:	07 d0       	rcall	.+14     	; 0x1e4 <__divmodhi4_neg1>
+ 1d6:	77 fd       	sbrc	r23, 7
+ 1d8:	09 d0       	rcall	.+18     	; 0x1ec <__divmodhi4_neg2>
+ 1da:	0e 94 fa 00 	call	0x1f4	; 0x1f4 <__udivmodhi4>
+ 1de:	07 fc       	sbrc	r0, 7
+ 1e0:	05 d0       	rcall	.+10     	; 0x1ec <__divmodhi4_neg2>
+ 1e2:	3e f4       	brtc	.+14     	; 0x1f2 <__divmodhi4_exit>
+
+000001e4 <__divmodhi4_neg1>:
+ 1e4:	90 95       	com	r25
+ 1e6:	81 95       	neg	r24
+ 1e8:	9f 4f       	sbci	r25, 0xFF	; 255
+ 1ea:	08 95       	ret
+
+000001ec <__divmodhi4_neg2>:
+ 1ec:	70 95       	com	r23
+ 1ee:	61 95       	neg	r22
+ 1f0:	7f 4f       	sbci	r23, 0xFF	; 255
+
+000001f2 <__divmodhi4_exit>:
+ 1f2:	08 95       	ret
+
+000001f4 <__udivmodhi4>:
+ 1f4:	aa 1b       	sub	r26, r26
+ 1f6:	bb 1b       	sub	r27, r27
+ 1f8:	51 e1       	ldi	r21, 0x11	; 17
+ 1fa:	07 c0       	rjmp	.+14     	; 0x20a <__udivmodhi4_ep>
+
+000001fc <__udivmodhi4_loop>:
+ 1fc:	aa 1f       	adc	r26, r26
+ 1fe:	bb 1f       	adc	r27, r27
+ 200:	a6 17       	cp	r26, r22
+ 202:	b7 07       	cpc	r27, r23
+ 204:	10 f0       	brcs	.+4      	; 0x20a <__udivmodhi4_ep>
+ 206:	a6 1b       	sub	r26, r22
+ 208:	b7 0b       	sbc	r27, r23
+
+0000020a <__udivmodhi4_ep>:
+ 20a:	88 1f       	adc	r24, r24
+ 20c:	99 1f       	adc	r25, r25
+ 20e:	5a 95       	dec	r21
+ 210:	a9 f7       	brne	.-22     	; 0x1fc <__udivmodhi4_loop>
+ 212:	80 95       	com	r24
+ 214:	90 95       	com	r25
+ 216:	bc 01       	movw	r22, r24
+ 218:	cd 01       	movw	r24, r26
+ 21a:	08 95       	ret
+
+0000021c <_exit>:
+ 21c:	f8 94       	cli
+
+0000021e <__stop_program>:
+ 21e:	ff cf       	rjmp	.-2      	; 0x21e <__stop_program>

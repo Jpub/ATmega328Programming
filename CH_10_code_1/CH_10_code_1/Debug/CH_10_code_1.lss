@@ -1,0 +1,151 @@
+
+CH_10_code_1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000e2  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .comment      00000030  00000000  00000000  00000136  2**0
+                  CONTENTS, READONLY
+  2 .debug_aranges 00000038  00000000  00000000  00000166  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_info   0000013f  00000000  00000000  0000019e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 000000e2  00000000  00000000  000002dd  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_line   00000100  00000000  00000000  000003bf  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_frame  00000054  00000000  00000000  000004c0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    00000159  00000000  00000000  00000514  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_loc    0000005f  00000000  00000000  0000066d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_ranges 00000028  00000000  00000000  000006cc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   8:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  10:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  14:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  18:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  1c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  20:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  24:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  28:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  2c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  30:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  34:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  38:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  3c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  40:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  44:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  48:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  4c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  50:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  54:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  58:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  5c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  60:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  64:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+  74:	0e 94 68 00 	call	0xd0	; 0xd0 <main>
+  78:	0c 94 6f 00 	jmp	0xde	; 0xde <_exit>
+
+0000007c <__bad_interrupt>:
+  7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000080 <UART_INIT>:
+#define F_CPU 16000000L
+#include <avr/io.h>
+#include <util/delay.h>
+void UART_INIT(void) {
+	UCSR0A |= _BV(U2X0); // 2배속 모드
+  80:	e0 ec       	ldi	r30, 0xC0	; 192
+  82:	f0 e0       	ldi	r31, 0x00	; 0
+  84:	80 81       	ld	r24, Z
+  86:	82 60       	ori	r24, 0x02	; 2
+  88:	80 83       	st	Z, r24
+	UBRR0H = 0x00; // 통신 속도(보율) 설정
+  8a:	10 92 c5 00 	sts	0x00C5, r1
+	UBRR0L = 207;
+  8e:	8f ec       	ldi	r24, 0xCF	; 207
+  90:	80 93 c4 00 	sts	0x00C4, r24
+	// 비동기, 8비트 데이터, 패리티 없음, 1비트 정지 비트 모드
+	UCSR0C |= 0x06;
+  94:	e2 ec       	ldi	r30, 0xC2	; 194
+  96:	f0 e0       	ldi	r31, 0x00	; 0
+  98:	80 81       	ld	r24, Z
+  9a:	86 60       	ori	r24, 0x06	; 6
+  9c:	80 83       	st	Z, r24
+	UCSR0B |= _BV(RXEN0); // 송수신 가능
+  9e:	e1 ec       	ldi	r30, 0xC1	; 193
+  a0:	f0 e0       	ldi	r31, 0x00	; 0
+  a2:	80 81       	ld	r24, Z
+  a4:	80 61       	ori	r24, 0x10	; 16
+  a6:	80 83       	st	Z, r24
+	UCSR0B |= _BV(TXEN0);
+  a8:	80 81       	ld	r24, Z
+  aa:	88 60       	ori	r24, 0x08	; 8
+  ac:	80 83       	st	Z, r24
+  ae:	08 95       	ret
+
+000000b0 <UART_receive>:
+}
+unsigned char UART_receive(void)
+{
+	while( !(UCSR0A & (1<<RXC0)) ); // 데이터 수신 대기
+  b0:	e0 ec       	ldi	r30, 0xC0	; 192
+  b2:	f0 e0       	ldi	r31, 0x00	; 0
+  b4:	80 81       	ld	r24, Z
+  b6:	88 23       	and	r24, r24
+  b8:	ec f7       	brge	.-6      	; 0xb4 <UART_receive+0x4>
+	return UDR0;
+  ba:	80 91 c6 00 	lds	r24, 0x00C6
+}
+  be:	08 95       	ret
+
+000000c0 <UART_transmit>:
+void UART_transmit(unsigned char data)
+{
+	while( !(UCSR0A & (1<<UDRE0)) ); // 송신 가능 대기
+  c0:	e0 ec       	ldi	r30, 0xC0	; 192
+  c2:	f0 e0       	ldi	r31, 0x00	; 0
+  c4:	90 81       	ld	r25, Z
+  c6:	95 ff       	sbrs	r25, 5
+  c8:	fd cf       	rjmp	.-6      	; 0xc4 <UART_transmit+0x4>
+	UDR0 = data; // 데이터 전송
+  ca:	80 93 c6 00 	sts	0x00C6, r24
+  ce:	08 95       	ret
+
+000000d0 <main>:
+}
+int main(int argc, char *argv[])
+{
+	unsigned char data;
+	UART_INIT(); // UART 통신 초기화
+  d0:	0e 94 40 00 	call	0x80	; 0x80 <UART_INIT>
+	while (1) {
+		data = UART_receive(); // 데이터 수신
+  d4:	0e 94 58 00 	call	0xb0	; 0xb0 <UART_receive>
+		UART_transmit(data); // 수신된 문자를 에코 백
+  d8:	0e 94 60 00 	call	0xc0	; 0xc0 <UART_transmit>
+  dc:	fb cf       	rjmp	.-10     	; 0xd4 <main+0x4>
+
+000000de <_exit>:
+  de:	f8 94       	cli
+
+000000e0 <__stop_program>:
+  e0:	ff cf       	rjmp	.-2      	; 0xe0 <__stop_program>

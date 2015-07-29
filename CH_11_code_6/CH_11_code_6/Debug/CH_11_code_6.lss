@@ -1,0 +1,262 @@
+
+CH_11_code_6.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000130  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .comment      00000030  00000000  00000000  00000184  2**0
+                  CONTENTS, READONLY
+  2 .debug_aranges 00000080  00000000  00000000  000001b4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_info   00000419  00000000  00000000  00000234  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 0000024d  00000000  00000000  0000064d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_line   0000030f  00000000  00000000  0000089a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_frame  00000144  00000000  00000000  00000bac  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    00000239  00000000  00000000  00000cf0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_loc    000004b2  00000000  00000000  00000f29  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_ranges 00000060  00000000  00000000  000013db  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   8:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  10:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  14:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  18:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  1c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  20:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  24:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  28:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  2c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  30:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  34:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  38:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  3c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  40:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  44:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  48:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  4c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  50:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  54:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  58:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  5c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  60:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  64:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+  74:	0e 94 58 00 	call	0xb0	; 0xb0 <main>
+  78:	0c 94 96 00 	jmp	0x12c	; 0x12c <_exit>
+
+0000007c <__bad_interrupt>:
+  7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000080 <INIT_PORT>:
+#include <util/delay.h>
+#include "UART.h"			// UART 라이브러리 사용
+
+void INIT_PORT(void)
+{
+	DDRB = 0x20;				// PB5 (디지털 13번 핀) 출력으로 설정
+  80:	80 e2       	ldi	r24, 0x20	; 32
+  82:	84 b9       	out	0x04, r24	; 4
+	PORTB = 0x00;				// LED는 꺼진 상태에서 시작
+  84:	15 b8       	out	0x05, r1	; 5
+	
+	DDRD = 0x00;				// 버튼 입력
+  86:	1a b8       	out	0x0a, r1	; 10
+	PORTD = 0x04;			// PD2 (디지털 2번 핀) 풀업 저항 사용
+  88:	84 e0       	ldi	r24, 0x04	; 4
+  8a:	8b b9       	out	0x0b, r24	; 11
+  8c:	08 95       	ret
+
+0000008e <button_pressed>:
+}
+
+unsigned char button_pressed(void)
+{
+	if(bit_is_clear(PIND, PIND2)){		// 첫 번째 검사
+  8e:	4a 99       	sbic	0x09, 2	; 9
+  90:	0d c0       	rjmp	.+26     	; 0xac <button_pressed+0x1e>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  92:	8f e3       	ldi	r24, 0x3F	; 63
+  94:	9c e9       	ldi	r25, 0x9C	; 156
+  96:	01 97       	sbiw	r24, 0x01	; 1
+  98:	f1 f7       	brne	.-4      	; 0x96 <button_pressed+0x8>
+  9a:	00 c0       	rjmp	.+0      	; 0x9c <button_pressed+0xe>
+  9c:	00 00       	nop
+		_delay_ms(10);
+		if(bit_is_clear(PIND, PIND2)) 		// 두 번째 검사
+  9e:	89 b1       	in	r24, 0x09	; 9
+  a0:	82 fb       	bst	r24, 2
+  a2:	88 27       	eor	r24, r24
+  a4:	80 f9       	bld	r24, 0
+  a6:	91 e0       	ldi	r25, 0x01	; 1
+  a8:	89 27       	eor	r24, r25
+  aa:	08 95       	ret
+		return 1;
+	}
+	return 0;
+  ac:	80 e0       	ldi	r24, 0x00	; 0
+}
+  ae:	08 95       	ret
+
+000000b0 <main>:
+
+int main(void)
+{
+	UART_INIT();				// UART 통신 초기화
+  b0:	0e 94 76 00 	call	0xec	; 0xec <UART_INIT>
+	INIT_PORT();				// 포트 설정
+  b4:	0e 94 40 00 	call	0x80	; 0x80 <INIT_PORT>
+	int state = 0;				// 현재 버튼의 상태
+  b8:	c0 e0       	ldi	r28, 0x00	; 0
+  ba:	d0 e0       	ldi	r29, 0x00	; 0
+			if(state == 0) UART_transmit('*');
+			state = 1;				// 버튼이 눌러진 상태로 표시
+			PORTB = 0x20;			// LED 켜기
+		}
+		else{
+			state = 0;				// 버튼이 눌러지지 않은 상태로 표시
+  bc:	d1 2c       	mov	r13, r1
+  be:	e1 2c       	mov	r14, r1
+	while(1){
+		if(button_pressed()){
+			// 눌러지지 않은 상태에서 눌러진 상태로 바뀔 때마다 ‘*’ 문자 전송
+			if(state == 0) UART_transmit('*');
+			state = 1;				// 버튼이 눌러진 상태로 표시
+			PORTB = 0x20;			// LED 켜기
+  c0:	68 94       	set
+  c2:	ff 24       	eor	r15, r15
+  c4:	f5 f8       	bld	r15, 5
+
+	while(1){
+		if(button_pressed()){
+			// 눌러지지 않은 상태에서 눌러진 상태로 바뀔 때마다 ‘*’ 문자 전송
+			if(state == 0) UART_transmit('*');
+			state = 1;				// 버튼이 눌러진 상태로 표시
+  c6:	01 e0       	ldi	r16, 0x01	; 1
+  c8:	10 e0       	ldi	r17, 0x00	; 0
+	UART_INIT();				// UART 통신 초기화
+	INIT_PORT();				// 포트 설정
+	int state = 0;				// 현재 버튼의 상태
+
+	while(1){
+		if(button_pressed()){
+  ca:	0e 94 47 00 	call	0x8e	; 0x8e <button_pressed>
+  ce:	88 23       	and	r24, r24
+  d0:	49 f0       	breq	.+18     	; 0xe4 <main+0x34>
+			// 눌러지지 않은 상태에서 눌러진 상태로 바뀔 때마다 ‘*’ 문자 전송
+			if(state == 0) UART_transmit('*');
+  d2:	cd 2b       	or	r28, r29
+  d4:	19 f4       	brne	.+6      	; 0xdc <main+0x2c>
+  d6:	8a e2       	ldi	r24, 0x2A	; 42
+  d8:	0e 94 8e 00 	call	0x11c	; 0x11c <UART_transmit>
+			state = 1;				// 버튼이 눌러진 상태로 표시
+			PORTB = 0x20;			// LED 켜기
+  dc:	f5 b8       	out	0x05, r15	; 5
+
+	while(1){
+		if(button_pressed()){
+			// 눌러지지 않은 상태에서 눌러진 상태로 바뀔 때마다 ‘*’ 문자 전송
+			if(state == 0) UART_transmit('*');
+			state = 1;				// 버튼이 눌러진 상태로 표시
+  de:	c0 2f       	mov	r28, r16
+  e0:	d1 2f       	mov	r29, r17
+  e2:	f3 cf       	rjmp	.-26     	; 0xca <main+0x1a>
+			PORTB = 0x20;			// LED 켜기
+		}
+		else{
+			state = 0;				// 버튼이 눌러지지 않은 상태로 표시
+			PORTB = 0x00;			// LED 끄기
+  e4:	15 b8       	out	0x05, r1	; 5
+			if(state == 0) UART_transmit('*');
+			state = 1;				// 버튼이 눌러진 상태로 표시
+			PORTB = 0x20;			// LED 켜기
+		}
+		else{
+			state = 0;				// 버튼이 눌러지지 않은 상태로 표시
+  e6:	cd 2d       	mov	r28, r13
+  e8:	de 2d       	mov	r29, r14
+  ea:	ef cf       	rjmp	.-34     	; 0xca <main+0x1a>
+
+000000ec <UART_INIT>:
+ */ 
+
+#include "UART.h"
+
+void UART_INIT(void) {
+	UCSR0A |= _BV(U2X0);
+  ec:	e0 ec       	ldi	r30, 0xC0	; 192
+  ee:	f0 e0       	ldi	r31, 0x00	; 0
+  f0:	80 81       	ld	r24, Z
+  f2:	82 60       	ori	r24, 0x02	; 2
+  f4:	80 83       	st	Z, r24
+
+	UBRR0H = 0x00;
+  f6:	10 92 c5 00 	sts	0x00C5, r1
+	UBRR0L = 207;
+  fa:	8f ec       	ldi	r24, 0xCF	; 207
+  fc:	80 93 c4 00 	sts	0x00C4, r24
+
+	UCSR0C |= 0x06;
+ 100:	e2 ec       	ldi	r30, 0xC2	; 194
+ 102:	f0 e0       	ldi	r31, 0x00	; 0
+ 104:	80 81       	ld	r24, Z
+ 106:	86 60       	ori	r24, 0x06	; 6
+ 108:	80 83       	st	Z, r24
+	
+	UCSR0B |= _BV(RXEN0);
+ 10a:	e1 ec       	ldi	r30, 0xC1	; 193
+ 10c:	f0 e0       	ldi	r31, 0x00	; 0
+ 10e:	80 81       	ld	r24, Z
+ 110:	80 61       	ori	r24, 0x10	; 16
+ 112:	80 83       	st	Z, r24
+	UCSR0B |= _BV(TXEN0);
+ 114:	80 81       	ld	r24, Z
+ 116:	88 60       	ori	r24, 0x08	; 8
+ 118:	80 83       	st	Z, r24
+ 11a:	08 95       	ret
+
+0000011c <UART_transmit>:
+	return UDR0;
+}
+
+void UART_transmit(unsigned char data)
+{
+	while( !(UCSR0A & (1<<UDRE0)) );
+ 11c:	e0 ec       	ldi	r30, 0xC0	; 192
+ 11e:	f0 e0       	ldi	r31, 0x00	; 0
+ 120:	90 81       	ld	r25, Z
+ 122:	95 ff       	sbrs	r25, 5
+ 124:	fd cf       	rjmp	.-6      	; 0x120 <UART_transmit+0x4>
+	UDR0 = data;
+ 126:	80 93 c6 00 	sts	0x00C6, r24
+ 12a:	08 95       	ret
+
+0000012c <_exit>:
+ 12c:	f8 94       	cli
+
+0000012e <__stop_program>:
+ 12e:	ff cf       	rjmp	.-2      	; 0x12e <__stop_program>

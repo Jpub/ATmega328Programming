@@ -1,0 +1,214 @@
+
+CH_9_code_3.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000013a  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .comment      00000030  00000000  00000000  0000018e  2**0
+                  CONTENTS, READONLY
+  2 .debug_aranges 00000020  00000000  00000000  000001be  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_info   000002a7  00000000  00000000  000001de  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 000000d3  00000000  00000000  00000485  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_line   000001c9  00000000  00000000  00000558  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_frame  00000024  00000000  00000000  00000724  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    0000016d  00000000  00000000  00000748  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_ranges 00000010  00000000  00000000  000008b5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   8:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  10:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  14:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  18:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  1c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  20:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  24:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  28:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  2c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  30:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  34:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  38:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  3c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  40:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  44:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  48:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  4c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  50:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  54:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  58:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  5c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  60:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  64:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+  74:	0e 94 40 00 	call	0x80	; 0x80 <main>
+  78:	0c 94 9b 00 	jmp	0x136	; 0x136 <_exit>
+
+0000007c <__bad_interrupt>:
+  7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000080 <main>:
+#include <avr/io.h>
+#include <util/delay.h>
+
+int main(void)
+{
+	DDRD = 0xFF; // PORT D의 8개 핀을 출력으로 설정
+  80:	8f ef       	ldi	r24, 0xFF	; 255
+  82:	8a b9       	out	0x0a, r24	; 10
+	while(1)
+	{
+		PORTD = 0x80; // 1번 패턴
+  84:	70 e8       	ldi	r23, 0x80	; 128
+		_delay_ms(1000);
+		PORTD = 0x40; // 2번 패턴
+  86:	60 e4       	ldi	r22, 0x40	; 64
+		_delay_ms(1000);
+		PORTD = 0x20; // 3번 패턴
+  88:	50 e2       	ldi	r21, 0x20	; 32
+		_delay_ms(1000);
+		PORTD = 0x10; // 4번 패턴
+  8a:	40 e1       	ldi	r20, 0x10	; 16
+		_delay_ms(1000);
+		PORTD = 0x08; // 5번 패턴
+  8c:	38 e0       	ldi	r19, 0x08	; 8
+		_delay_ms(1000);
+		PORTD = 0x04; // 6번 패턴
+  8e:	24 e0       	ldi	r18, 0x04	; 4
+		_delay_ms(1000);
+		PORTD = 0x02; // 7번 패턴
+  90:	92 e0       	ldi	r25, 0x02	; 2
+		_delay_ms(1000);
+		PORTD = 0x01; // 8번 패턴
+  92:	81 e0       	ldi	r24, 0x01	; 1
+int main(void)
+{
+	DDRD = 0xFF; // PORT D의 8개 핀을 출력으로 설정
+	while(1)
+	{
+		PORTD = 0x80; // 1번 패턴
+  94:	7b b9       	out	0x0b, r23	; 11
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  96:	af ef       	ldi	r26, 0xFF	; 255
+  98:	e3 ed       	ldi	r30, 0xD3	; 211
+  9a:	f0 e3       	ldi	r31, 0x30	; 48
+  9c:	a1 50       	subi	r26, 0x01	; 1
+  9e:	e0 40       	sbci	r30, 0x00	; 0
+  a0:	f0 40       	sbci	r31, 0x00	; 0
+  a2:	e1 f7       	brne	.-8      	; 0x9c <main+0x1c>
+  a4:	00 c0       	rjmp	.+0      	; 0xa6 <main+0x26>
+  a6:	00 00       	nop
+		_delay_ms(1000);
+		PORTD = 0x40; // 2번 패턴
+  a8:	6b b9       	out	0x0b, r22	; 11
+  aa:	af ef       	ldi	r26, 0xFF	; 255
+  ac:	e3 ed       	ldi	r30, 0xD3	; 211
+  ae:	f0 e3       	ldi	r31, 0x30	; 48
+  b0:	a1 50       	subi	r26, 0x01	; 1
+  b2:	e0 40       	sbci	r30, 0x00	; 0
+  b4:	f0 40       	sbci	r31, 0x00	; 0
+  b6:	e1 f7       	brne	.-8      	; 0xb0 <main+0x30>
+  b8:	00 c0       	rjmp	.+0      	; 0xba <main+0x3a>
+  ba:	00 00       	nop
+		_delay_ms(1000);
+		PORTD = 0x20; // 3번 패턴
+  bc:	5b b9       	out	0x0b, r21	; 11
+  be:	af ef       	ldi	r26, 0xFF	; 255
+  c0:	e3 ed       	ldi	r30, 0xD3	; 211
+  c2:	f0 e3       	ldi	r31, 0x30	; 48
+  c4:	a1 50       	subi	r26, 0x01	; 1
+  c6:	e0 40       	sbci	r30, 0x00	; 0
+  c8:	f0 40       	sbci	r31, 0x00	; 0
+  ca:	e1 f7       	brne	.-8      	; 0xc4 <main+0x44>
+  cc:	00 c0       	rjmp	.+0      	; 0xce <main+0x4e>
+  ce:	00 00       	nop
+		_delay_ms(1000);
+		PORTD = 0x10; // 4번 패턴
+  d0:	4b b9       	out	0x0b, r20	; 11
+  d2:	af ef       	ldi	r26, 0xFF	; 255
+  d4:	e3 ed       	ldi	r30, 0xD3	; 211
+  d6:	f0 e3       	ldi	r31, 0x30	; 48
+  d8:	a1 50       	subi	r26, 0x01	; 1
+  da:	e0 40       	sbci	r30, 0x00	; 0
+  dc:	f0 40       	sbci	r31, 0x00	; 0
+  de:	e1 f7       	brne	.-8      	; 0xd8 <main+0x58>
+  e0:	00 c0       	rjmp	.+0      	; 0xe2 <main+0x62>
+  e2:	00 00       	nop
+		_delay_ms(1000);
+		PORTD = 0x08; // 5번 패턴
+  e4:	3b b9       	out	0x0b, r19	; 11
+  e6:	af ef       	ldi	r26, 0xFF	; 255
+  e8:	e3 ed       	ldi	r30, 0xD3	; 211
+  ea:	f0 e3       	ldi	r31, 0x30	; 48
+  ec:	a1 50       	subi	r26, 0x01	; 1
+  ee:	e0 40       	sbci	r30, 0x00	; 0
+  f0:	f0 40       	sbci	r31, 0x00	; 0
+  f2:	e1 f7       	brne	.-8      	; 0xec <main+0x6c>
+  f4:	00 c0       	rjmp	.+0      	; 0xf6 <main+0x76>
+  f6:	00 00       	nop
+		_delay_ms(1000);
+		PORTD = 0x04; // 6번 패턴
+  f8:	2b b9       	out	0x0b, r18	; 11
+  fa:	af ef       	ldi	r26, 0xFF	; 255
+  fc:	e3 ed       	ldi	r30, 0xD3	; 211
+  fe:	f0 e3       	ldi	r31, 0x30	; 48
+ 100:	a1 50       	subi	r26, 0x01	; 1
+ 102:	e0 40       	sbci	r30, 0x00	; 0
+ 104:	f0 40       	sbci	r31, 0x00	; 0
+ 106:	e1 f7       	brne	.-8      	; 0x100 <main+0x80>
+ 108:	00 c0       	rjmp	.+0      	; 0x10a <main+0x8a>
+ 10a:	00 00       	nop
+		_delay_ms(1000);
+		PORTD = 0x02; // 7번 패턴
+ 10c:	9b b9       	out	0x0b, r25	; 11
+ 10e:	af ef       	ldi	r26, 0xFF	; 255
+ 110:	e3 ed       	ldi	r30, 0xD3	; 211
+ 112:	f0 e3       	ldi	r31, 0x30	; 48
+ 114:	a1 50       	subi	r26, 0x01	; 1
+ 116:	e0 40       	sbci	r30, 0x00	; 0
+ 118:	f0 40       	sbci	r31, 0x00	; 0
+ 11a:	e1 f7       	brne	.-8      	; 0x114 <main+0x94>
+ 11c:	00 c0       	rjmp	.+0      	; 0x11e <main+0x9e>
+ 11e:	00 00       	nop
+		_delay_ms(1000);
+		PORTD = 0x01; // 8번 패턴
+ 120:	8b b9       	out	0x0b, r24	; 11
+ 122:	af ef       	ldi	r26, 0xFF	; 255
+ 124:	e3 ed       	ldi	r30, 0xD3	; 211
+ 126:	f0 e3       	ldi	r31, 0x30	; 48
+ 128:	a1 50       	subi	r26, 0x01	; 1
+ 12a:	e0 40       	sbci	r30, 0x00	; 0
+ 12c:	f0 40       	sbci	r31, 0x00	; 0
+ 12e:	e1 f7       	brne	.-8      	; 0x128 <main+0xa8>
+ 130:	00 c0       	rjmp	.+0      	; 0x132 <main+0xb2>
+ 132:	00 00       	nop
+ 134:	af cf       	rjmp	.-162    	; 0x94 <main+0x14>
+
+00000136 <_exit>:
+ 136:	f8 94       	cli
+
+00000138 <__stop_program>:
+ 138:	ff cf       	rjmp	.-2      	; 0x138 <__stop_program>
